@@ -1,10 +1,5 @@
-/*
-  Set any config.h overrides for your specific keymap here.
-  See config.h options at https://docs.qmk.fm/#/config_options?id=the-configh-file
-*/
 #define ORYX_CONFIGURATOR
 #define RETRO_TAPPING
-
 #define PERMISSIVE_HOLD
 
 #undef RGB_DISABLE_TIMEOUT
@@ -20,3 +15,16 @@
 #define CAPS_LOCK_STATUS
 #define FIRMWARE_VERSION u8"ENRen/KLpAw"
 #define RGB_MATRIX_STARTUP_SPD 60
+
+// leader key
+#define LEADER_TIMEOUT 500
+#define LEADER_PER_KEY_TIMING 200
+
+// mouse (contant mode)
+#define MK_3_SPEED
+#define MK_C_OFFSET_0 5
+#define MK_C_OFFSET_1 10
+#define MK_C_OFFSET_2 20
+#define MK_W_OFFSET_0 1
+#define MK_W_OFFSET_1 3
+#define MK_W_OFFSET_2 5

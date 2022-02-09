@@ -48,7 +48,6 @@ enum layers {
   NAVI,
   NUMPAD,
   ADJUST,
-  MACRO,
 };
 
 enum custom_keycodes {
@@ -57,22 +56,14 @@ enum custom_keycodes {
   RED,
   GREEN,
   BLUE,
-  PYHTTP,
-  NC_L,
-  SS_LT,
-  SUID,
-  LFI_PWD,
-  XSS_AL,
-  PHP64,
   PYPTY,
   TTY_RAW,
-  XTERM,
 };
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_ergodox_pretty(
-    KC_CAPSLOCK,    KC_1,     KC_2,     KC_3,     KC_4,     KC_5,   KC_LBRC,              KC_RBRC,  KC_6,     KC_7,     KC_8,       KC_9,     KC_0,     KC_PSCR,
+    KC_LEAD,        KC_1,     KC_2,     KC_3,     KC_4,     KC_5,   KC_LBRC,              KC_RBRC,  KC_6,     KC_7,     KC_8,       KC_9,     KC_0,     KC_PSCR,
     OSM(MOD_LGUI),  KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,   KC_TAB,               KC_ENT,   KC_Y,     KC_U,     KC_I,       KC_O,     KC_P,     OSM(MOD_LALT),
     KC_GRV,         KC_A,     MT_S,     MT_D,     MT_F,     KC_G,                                   KC_H,     MT_J,     MT_K,       MT_L,     MT_SCLN,  KC_BSLS,
     OSM(MOD_LSFT),  MT_Z,     KC_X,     KC_C,     KC_V,     KC_B,   KC_MINS,              KC_EQL,   KC_N,     KC_M,     KC_COMM,    KC_DOT,   KC_SLSH,  OSM(MOD_RCTL),
@@ -82,24 +73,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             OSL(LOWER), KC_DELETE, KC_PGUP,               KC_PGDOWN,  KC_ESCAPE,  OSL(UPPER)
   ),
   [LOWER] = LAYOUT_ergodox_pretty(
-    _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
+    KC_CAPS, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
     _______, KC_F11,  KC_TILD, KC_MINS, KC_UNDS, KC_F11,  _______,          _______, KC_F12,  KC_PLUS, KC_EQL,  KC_GRV,  KC_F12,  _______,
     _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
-    _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,          _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_BSLS, KC_PIPE, _______,
+    _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,          _______, KC_CIRC, KC_AMPR, KC_COMM, KC_DOT,  KC_PIPE, _______,
     _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, TO(BASE),
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
                                        TO(NAVI), _______, _______,          _______, _______, TT(ADJUST)
   ),
   [UPPER] = LAYOUT_ergodox_pretty(
-    _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
+    KC_CAPS, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,          _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
-    _______, KC_LCBR, KC_LBRC, KC_LPRN, KC_DQUO, KC_PIPE,                            KC_BSLS, KC_QUOT, KC_RPRN, KC_RCBR, KC_RCBR, _______,
+    _______, KC_LCBR, KC_LBRC, KC_LPRN, KC_DQUO, KC_PIPE,                            KC_BSLS, KC_QUOT, KC_RPRN, KC_RBRC, KC_RCBR, _______,
     _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,          _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_BSLS, KC_PIPE, _______,
     _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, TO(BASE),
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
-                                      TT(MACRO), _______, _______,          _______, _______, TO(NUMPAD)
+                                     TT(ADJUST), _______, _______,          _______, _______, TO(NUMPAD)
   ),
   [NAVI] = LAYOUT_ergodox_pretty(
     _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
@@ -132,17 +123,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
                                        TO(BASE), _______, _______,          _______, _______, TO(BASE)
-  ),
-  [MACRO] = LAYOUT_ergodox_pretty(
-    _______, _______, _______, _______, _______, _______, _______,           _______, _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______, _______,           _______, _______, _______, _______, _______, _______, _______,
-    _______, SUID,    XSS_AL,  PHP64,   LFI_PWD, _______,                             _______, PYHTTP,  PYPTY,   TTY_RAW, XTERM,   _______,
-    _______, _______, DM_RSTP, DM_REC1, DM_PLY1, _______, _______,           _______, _______, DM_PLY2, DM_REC2, DM_RSTP, _______, _______,
-    _______, _______, _______, _______, _______,                                               _______, _______, _______, _______, TO(BASE),
-
-                                                 _______, _______,           _______, _______,
-                                                          _______,           _______,
-                                        _______, _______, _______,           _______, _______, _______
   ),
 };
 // clang-format on
@@ -312,47 +292,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         rgblight_sethsv(172, 255, 255);
       }
       return false;
-    // Macros
-    case PYHTTP:
-      if (record->event.pressed) {
-        SEND_STRING("python3 -m http.server\n");
-      }
-      return false;
-    case SUID:
-      if (record->event.pressed) {
-        SEND_STRING("find / -perm -4000 2>/dev/null\n");
-      }
-      return false;
-    case LFI_PWD:
-      if (record->event.pressed) {
-        SEND_STRING("../../../../../../etc/passwd");
-      }
-      return false;
-    case XSS_AL:
-      if (record->event.pressed) {
-        SEND_STRING("<script>alert(window.origin)</script>");
-      }
-      return false;
-    case PHP64:
-      if (record->event.pressed) {
-        SEND_STRING("php://filter/convert.base64-encode/resource=");
-      }
-      return false;
-    case PYPTY:
-      if (record->event.pressed) {
-        SEND_STRING("python3 -c \"import pty; pty.spawn('/bin/bash')\"\n");
-      }
-      return false;
-    case TTY_RAW:
-      if (record->event.pressed) {
-        SEND_STRING("stty raw -echo; fg\n\n");
-      }
-      return false;
-    case XTERM:
-      if (record->event.pressed) {
-        SEND_STRING("export TERM=xterm\n");
-      }
-      return false;
   }
   return true;
 }
@@ -382,7 +321,7 @@ uint32_t layer_state_set_user(uint32_t state) {
       ergodox_right_led_1_on();
       ergodox_right_led_3_on();
       break;
-    case MACRO:
+    case 6:
       ergodox_right_led_2_on();
       ergodox_right_led_3_on();
       break;
@@ -397,3 +336,61 @@ uint32_t layer_state_set_user(uint32_t state) {
   return state;
 };
 
+LEADER_EXTERNS();
+void matrix_scan_user(void) {
+  LEADER_DICTIONARY() {
+    leading = false;
+    leader_end();
+
+    SEQ_ONE_KEY(KC_B) { SEND_STRING("#!/bin/bash\n"); }
+    SEQ_ONE_KEY(KC_H) { SEND_STRING("python3 -m http.server\n"); }
+    SEQ_ONE_KEY(KC_L) { SEND_STRING("nc -lnvp "); }
+    SEQ_ONE_KEY(KC_P) { SEND_STRING("#!/usr/bin/python3\n"); }
+    SEQ_TWO_KEYS(KC_D, KC_T) { SEND_STRING("../../../../../../etc/passwd"); }
+    SEQ_TWO_KEYS(KC_H, KC_P) { SEND_STRING("python3 -m http.server "); }
+    SEQ_TWO_KEYS(KC_L, KC_H) { SEND_STRING("127.0.0.1"); }
+    SEQ_TWO_KEYS(KC_P, KC_S) { SEND_STRING("ps aux --forest\n"); }
+    SEQ_TWO_KEYS(KC_S, KC_S) { SEND_STRING("ss -lntp\n"); }
+    SEQ_TWO_KEYS(KC_X, KC_T) { SEND_STRING("export TERM=xterm\n"); }
+    SEQ_TWO_KEYS(KC_P, KC_B) {
+      SEND_STRING("php://filter/convert.base64-encode/resource=");
+    }
+    SEQ_TWO_KEYS(KC_P, KC_T) {
+      SEND_STRING("python3 -c \"import pty; pty.spawn('/bin/bash')\"\n");
+    }
+    SEQ_TWO_KEYS(KC_Z, KC_T) {
+      SEND_STRING(SS_LCTL("z"));
+      SEND_STRING(SS_DELAY(100));
+      SEND_STRING("stty raw -echo; fg\n\n");
+      SEND_STRING(SS_DELAY(100));
+      SEND_STRING("export TERM=xterm\n");
+    }
+    SEQ_TWO_KEYS(KC_D, KC_D) {
+      // delete line
+      tap_code(KC_HOME);
+      register_code(KC_LSFT);
+      tap_code(KC_END);
+      unregister_code(KC_LSFT);
+      tap_code(KC_DEL);
+      tap_code(KC_DEL);
+    }
+    SEQ_THREE_KEYS(KC_X, KC_S, KC_S) {
+      SEND_STRING("<script>alert(window.origin)</script>");
+    }
+    SEQ_FOUR_KEYS(KC_S, KC_U, KC_I, KC_D) {
+      SEND_STRING("find / -perm -4000 2>/dev/null\n");
+    }
+  }
+}
+
+void leader_start(void) {
+  ergodox_right_led_1_on();
+  ergodox_right_led_2_on();
+  ergodox_right_led_3_on();
+}
+
+void leader_end(void) {
+  ergodox_right_led_1_off();
+  ergodox_right_led_2_off();
+  ergodox_right_led_3_off();
+}
