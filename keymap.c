@@ -1,33 +1,4 @@
 #include QMK_KEYBOARD_H
-#include "keymap_belgian.h"
-#include "keymap_bepo.h"
-#include "keymap_br_abnt2.h"
-#include "keymap_canadian_multilingual.h"
-#include "keymap_contributions.h"
-#include "keymap_croatian.h"
-#include "keymap_czech.h"
-#include "keymap_danish.h"
-#include "keymap_estonian.h"
-#include "keymap_french.h"
-#include "keymap_german.h"
-#include "keymap_german_ch.h"
-#include "keymap_hungarian.h"
-#include "keymap_italian.h"
-#include "keymap_jp.h"
-#include "keymap_korean.h"
-#include "keymap_lithuanian_azerty.h"
-#include "keymap_nordic.h"
-#include "keymap_norwegian.h"
-#include "keymap_portuguese.h"
-#include "keymap_romanian.h"
-#include "keymap_russian.h"
-#include "keymap_slovak.h"
-#include "keymap_slovenian.h"
-#include "keymap_spanish.h"
-#include "keymap_swedish.h"
-#include "keymap_turkish_q.h"
-#include "keymap_uk.h"
-#include "keymap_us_international.h"
 #include "version.h"
 
 #define MT_Z MT(MOD_LCTL | MOD_LSFT, KC_Z)
@@ -70,13 +41,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LEFT,        KC_RGHT,  KC_HOME,  KC_ENT,   KC_SPC,                                                     KC_TAB,   KC_BSPC,    KC_END,   KC_DOWN,  KC_UP,
                                         LCTL(KC_LALT),  LM(UPPER,MOD_LGUI),               LM(LOWER,MOD_RGUI), LSFT(KC_RGUI),
                                                         LM(UPPER,MOD_LCTL),               LM(LOWER,MOD_RCTL),
-                                            OSL(LOWER), KC_DELETE, KC_PGUP,               KC_PGDOWN,  KC_ESCAPE,  OSL(UPPER)
+                                               OSL(LOWER), KC_DEL, KC_PGUP,               KC_PGDOWN, KC_ESC, OSL(UPPER)
   ),
   [LOWER] = LAYOUT_ergodox_pretty(
     KC_CAPS, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
     _______, KC_F11,  KC_TILD, KC_MINS, KC_UNDS, KC_F11,  _______,          _______, KC_F12,  KC_PLUS, KC_EQL,  KC_GRV,  KC_F12,  _______,
-    _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                               KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______,
-    _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,          _______, KC_CIRC, KC_AMPR, KC_COMM, KC_DOT,  KC_PIPE, _______,
+    _______, KC_4,    KC_3,    KC_2,    KC_1,    KC_5,                               KC_6,    KC_0,    KC_9,    KC_8,    KC_7,    _______,
+    _______, KC_DLR,  KC_HASH, KC_AT,   KC_EXLM, KC_PERC, _______,          _______, KC_CIRC, KC_COMM, KC_DOT,  KC_ASTR, KC_AMPR, _______,
     _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, TO(BASE),
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
@@ -86,7 +57,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_CAPS, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,          _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
     _______, KC_LCBR, KC_LBRC, KC_LPRN, KC_DQUO, KC_PIPE,                            KC_BSLS, KC_QUOT, KC_RPRN, KC_RBRC, KC_RCBR, _______,
-    _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,          _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_BSLS, KC_PIPE, _______,
+    _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,          _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_ESC,  KC_DEL, _______,
     _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, TO(BASE),
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
@@ -127,7 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
-extern bool g_suspend_state;
+
 extern rgb_config_t rgb_matrix_config;
 
 void keyboard_post_init_user(void) { rgb_matrix_enable(); }
@@ -231,9 +202,7 @@ void set_layer_color(int layer) {
 }
 
 void rgb_matrix_indicators_user(void) {
-  if (g_suspend_state || keyboard_config.disable_layer_led) {
-    return;
-  }
+  if (keyboard_config.disable_layer_led) { return; }
   switch (biton32(layer_state)) {
     case 0:
       set_layer_color(0);
@@ -296,9 +265,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-uint32_t layer_state_set_user(uint32_t state) {
-  uint8_t layer = biton32(state);
-
+layer_state_t layer_state_set_user(layer_state_t state) {
+    layer_state_t layer = biton(state);
   ergodox_board_led_off();
   ergodox_right_led_1_off();
   ergodox_right_led_2_off();

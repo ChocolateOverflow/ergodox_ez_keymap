@@ -13,7 +13,7 @@
 #define MOUSEKEY_WHEEL_INTERVAL 50
 
 #define CAPS_LOCK_STATUS
-#define FIRMWARE_VERSION u8"ENRen/KLpAw"
+#define FIRMWARE_VERSION u8"ENRen/Z4qYv"
 #define RGB_MATRIX_STARTUP_SPD 60
 
 // leader key
