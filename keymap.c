@@ -9,7 +9,6 @@
 #define MT_K MT(MOD_RCTL, KC_K)
 #define MT_L MT(MOD_RGUI, KC_L)
 #define MT_SCLN MT(MOD_RALT, KC_SCLN)
-#define TG_LA_CL TOGGLE_LAYER_COLOR
 #define WEBUSB WEBUSB_PAIR
 
 enum layers {
@@ -22,12 +21,7 @@ enum layers {
 };
 
 enum custom_keycodes {
-  RGB_SLD = EZ_SAFE_RANGE,
-  YELLOW,
-  RED,
-  GREEN,
-  BLUE,
-  PYPTY,
+  PYPTY = EZ_SAFE_RANGE,
   TTY_RAW,
 };
 
@@ -35,7 +29,7 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_ergodox_pretty(
     KC_LEAD,        KC_1,     KC_2,     KC_3,     KC_4,     KC_5,   KC_LBRC,              KC_RBRC,  KC_6,     KC_7,     KC_8,       KC_9,     KC_0,     KC_PSCR,
-    OSM(MOD_LGUI),  KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,   KC_TAB,               KC_ENT,   KC_Y,     KC_U,     KC_I,       KC_O,     KC_P,     OSM(MOD_LALT),
+    MOD_LGUI,       KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,   KC_TAB,               KC_ENT,   KC_Y,     KC_U,     KC_I,       KC_O,     KC_P,     MOD_LALT,
     KC_GRV,         KC_A,     MT_S,     MT_D,     MT_F,     KC_G,                                   KC_H,     MT_J,     MT_K,       MT_L,     MT_SCLN,  KC_BSLS,
     OSM(MOD_LSFT),  MT_Z,     KC_X,     KC_C,     KC_V,     KC_B,   KC_MINS,              KC_EQL,   KC_N,     KC_M,     KC_COMM,    KC_DOT,   KC_SLSH,  OSM(MOD_RCTL),
     KC_LEFT,        KC_RGHT,  KC_HOME,  KC_ENT,   KC_SPC,                                                     KC_TAB,   KC_BSPC,    KC_END,   KC_DOWN,  KC_UP,
@@ -75,9 +69,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [NUMPAD] = LAYOUT_ergodox_pretty(
     _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
-    _______, KC_EXLM, KC_CIRC, KC_PIPE, KC_AMPR, KC_PENT, _______,          _______, KC_PCMM, KC_P7,   KC_P8,   KC_P9,   KC_PCMM, _______,
-    _______, KC_PSLS, KC_PAST, KC_PMNS, KC_PPLS, KC_PEQL,                            KC_PDOT, KC_P4,   KC_P5,   KC_P6,   KC_PDOT, _______,
-    _______, KC_LT,   KC_GT,   KC_LPRN, KC_RPRN, _______, _______,          _______, KC_P0,   KC_P1,   KC_P2,   KC_P3,   KC_P0,   _______,
+    _______, KC_EXLM, KC_CIRC, KC_PIPE, KC_AMPR, KC_ENT,  _______,          _______, KC_COMM, KC_7,    KC_8,    KC_9,    KC_COMM, _______,
+    _______, KC_SLSH, KC_ASTR, KC_MINS, KC_PLUS, KC_EQL,                             KC_0,    KC_4,    KC_5,    KC_6,    KC_0,    _______,
+    _______, KC_LT,   KC_GT,   KC_LPRN, KC_RPRN, _______, _______,          _______, KC_DOT,  KC_1,    KC_2,    KC_3,    KC_DOT,  _______,
     KC_LNUM, _______, _______, _______, _______,                                              _______, _______, _______, _______, TO(BASE),
 
                                                 _______, _______,           _______, _______,
@@ -87,9 +81,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [ADJUST] = LAYOUT_ergodox_pretty(
     TO(NAVI),_______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, TO(NUMPAD),
-    _______, YELLOW,  RED,     GREEN,   BLUE,    _______, _______,          _______, _______, KC_VOLD, KC_VOLU, KC_MUTE, XXXXXXX, _______,
-    _______, RGB_TOG,TG_LA_CL, RGB_VAD, RGB_VAI, _______,                            _______, KC_MPRV, KC_MNXT, KC_MPLY, XXXXXXX, _______,
-    _______, RGB_SPD, RGB_SPI, RGB_MOD, RGB_SLD, _______, _______,          _______, _______, KC_BRID, KC_BRIU, WEBUSB,  XXXXXXX, _______,
+    _______, RGB_TOG, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______,          _______, _______, KC_VOLD, KC_VOLU, KC_MUTE, RGB_TOG, _______,
+    _______, RGB_VAI, KC_MPLY, KC_MPRV, KC_MNXT, _______,                            _______, KC_MPRV, KC_MNXT, KC_MPLY, RGB_VAI, _______,
+    _______, RGB_VAD, WEBUSB,  KC_BRID, KC_BRIU, _______, _______,          _______, _______, KC_BRID, KC_BRIU, WEBUSB,  RGB_VAD, _______,
     RESET,   _______, _______, _______, _______,                                              _______, _______, _______, _______, TO(BASE),
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
@@ -104,6 +98,7 @@ extern rgb_config_t rgb_matrix_config;
 void keyboard_post_init_user(void) { rgb_matrix_enable(); }
 
 const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
+    // BASE
     [0] = {{0, 255, 255}, {0, 255, 255}, {0, 255, 255}, {0, 255, 255},
            {0, 255, 255}, {0, 255, 255}, {0, 255, 255}, {0, 255, 255},
            {0, 255, 255}, {0, 255, 255}, {0, 255, 255}, {0, 255, 255},
@@ -117,6 +112,7 @@ const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
            {0, 255, 255}, {0, 255, 255}, {0, 255, 255}, {0, 255, 255},
            {0, 255, 255}, {0, 255, 255}, {0, 255, 255}, {0, 255, 255}},
 
+    // LOWER
     [1] = {{152, 255, 255}, {152, 255, 255}, {152, 255, 255}, {152, 255, 255},
            {152, 255, 255}, {152, 255, 255}, {152, 255, 255}, {152, 255, 255},
            {152, 255, 255}, {152, 255, 255}, {152, 255, 255}, {152, 255, 255},
@@ -130,6 +126,7 @@ const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
            {152, 255, 255}, {152, 255, 255}, {152, 255, 255}, {152, 255, 255},
            {152, 255, 255}, {152, 255, 255}, {152, 255, 255}, {152, 255, 255}},
 
+    // UPPER
     [2] = {{86, 255, 255}, {86, 255, 255}, {86, 255, 255}, {86, 255, 255},
            {86, 255, 255}, {86, 255, 255}, {86, 255, 255}, {86, 255, 255},
            {86, 255, 255}, {86, 255, 255}, {86, 255, 255}, {86, 255, 255},
@@ -143,6 +140,7 @@ const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
            {86, 255, 255}, {86, 255, 255}, {86, 255, 255}, {86, 255, 255},
            {86, 255, 255}, {86, 255, 255}, {86, 255, 255}, {86, 255, 255}},
 
+    // NAVI
     [3] = {{215, 255, 255}, {215, 255, 255}, {215, 255, 255}, {215, 255, 255},
            {215, 255, 255}, {215, 255, 255}, {215, 255, 255}, {215, 255, 255},
            {215, 255, 255}, {215, 255, 255}, {215, 255, 255}, {35, 255, 255},
@@ -156,19 +154,21 @@ const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
            {215, 255, 255}, {215, 255, 255}, {215, 255, 255}, {215, 255, 255},
            {215, 255, 255}, {215, 255, 255}, {215, 255, 255}, {215, 255, 255}},
 
-    [4] = {{43, 255, 255}, {43, 255, 255}, {43, 255, 255}, {43, 255, 255},
-           {43, 255, 255}, {43, 255, 255}, {43, 255, 255}, {43, 255, 255},
-           {43, 255, 255}, {43, 255, 255}, {43, 255, 255}, {43, 255, 255},
-           {43, 255, 255}, {43, 255, 255}, {43, 255, 255}, {43, 255, 255},
-           {43, 255, 255}, {43, 255, 255}, {43, 255, 255}, {43, 255, 255},
-           {43, 255, 255}, {43, 255, 255}, {43, 255, 255}, {43, 255, 255},
-           {43, 255, 255}, {43, 255, 255}, {43, 255, 255}, {43, 255, 255},
-           {43, 255, 255}, {43, 255, 255}, {43, 255, 255}, {43, 255, 255},
-           {43, 255, 255}, {43, 255, 255}, {43, 255, 255}, {43, 255, 255},
-           {43, 255, 255}, {43, 255, 255}, {43, 255, 255}, {43, 255, 255},
-           {43, 255, 255}, {43, 255, 255}, {43, 255, 255}, {43, 255, 255},
-           {43, 255, 255}, {43, 255, 255}, {43, 255, 255}, {43, 255, 255}},
+    // NUMPAD
+    [4] = {{43, 255, 255},  {43, 255, 255}, {43, 255, 255},  {43, 255, 255},
+           {43, 255, 255},  {43, 255, 255}, {219, 255, 255}, {43, 255, 255},
+           {219, 255, 255}, {43, 255, 255}, {219, 255, 255}, {43, 255, 255},
+           {219, 255, 255}, {43, 255, 255}, {219, 255, 255}, {43, 255, 255},
+           {219, 255, 255}, {43, 255, 255}, {219, 255, 255}, {43, 255, 255},
+           {43, 255, 255},  {43, 255, 255}, {43, 255, 255},  {43, 255, 255},
+           {43, 255, 255},  {43, 255, 255}, {43, 255, 255},  {43, 255, 255},
+           {43, 255, 255},  {43, 255, 255}, {43, 255, 255},  {43, 255, 255},
+           {43, 255, 255},  {43, 255, 255}, {43, 255, 255},  {43, 255, 255},
+           {43, 255, 255},  {43, 255, 255}, {43, 255, 255},  {43, 255, 255},
+           {43, 255, 255},  {43, 255, 255}, {43, 255, 255},  {43, 255, 255},
+           {43, 255, 255},  {43, 255, 255}, {43, 255, 255},  {43, 255, 255}},
 
+    // ADJUST
     [5] = {{129, 255, 255}, {129, 255, 255}, {129, 255, 255}, {129, 255, 255},
            {129, 255, 255}, {129, 255, 255}, {129, 255, 255}, {129, 255, 255},
            {129, 255, 255}, {129, 255, 255}, {129, 255, 255}, {129, 255, 255},
@@ -176,8 +176,8 @@ const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
            {129, 255, 255}, {129, 255, 255}, {129, 255, 255}, {129, 255, 255},
            {129, 255, 255}, {129, 255, 255}, {129, 255, 255}, {129, 255, 255},
            {129, 255, 255}, {129, 255, 255}, {129, 255, 255}, {129, 255, 255},
-           {129, 255, 255}, {129, 255, 255}, {152, 255, 255}, {74, 255, 255},
-           {0, 245, 245},   {41, 255, 255},  {129, 255, 255}, {129, 255, 255},
+           {129, 255, 255}, {129, 255, 255}, {129, 255, 255}, {129, 255, 255},
+           {129, 245, 245}, {129, 255, 255}, {129, 255, 255}, {129, 255, 255},
            {129, 255, 255}, {129, 255, 255}, {129, 255, 255}, {129, 255, 255},
            {129, 255, 255}, {129, 255, 255}, {129, 255, 255}, {129, 255, 255},
            {129, 255, 255}, {129, 255, 255}, {129, 255, 255}, {129, 255, 255}},
@@ -227,42 +227,6 @@ void rgb_matrix_indicators_user(void) {
         rgb_matrix_set_color_all(0, 0, 0);
       break;
   }
-}
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    // RGB
-    case RGB_SLD:
-      if (record->event.pressed) {
-        rgblight_mode(1);
-      }
-      return false;
-    case YELLOW:
-      if (record->event.pressed) {
-        rgblight_mode(1);
-        rgblight_sethsv(27, 255, 255);
-      }
-      return false;
-    case RED:
-      if (record->event.pressed) {
-        rgblight_mode(1);
-        rgblight_sethsv(0, 255, 255);
-      }
-      return false;
-    case GREEN:
-      if (record->event.pressed) {
-        rgblight_mode(1);
-        rgblight_sethsv(86, 255, 128);
-      }
-      return false;
-    case BLUE:
-      if (record->event.pressed) {
-        rgblight_mode(1);
-        rgblight_sethsv(172, 255, 255);
-      }
-      return false;
-  }
-  return true;
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
