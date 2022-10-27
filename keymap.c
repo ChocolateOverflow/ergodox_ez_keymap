@@ -9,6 +9,8 @@
 #define MT_K MT(MOD_RCTL, KC_K)
 #define MT_L MT(MOD_RGUI, KC_L)
 #define MT_SCLN MT(MOD_RALT, KC_SCLN)
+// VM host key
+#define VMHOST KC_RIGHT_CTRL
 #define WEBUSB WEBUSB_PAIR
 
 enum layers {
@@ -33,28 +35,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_GRV,         KC_A,     MT_S,     MT_D,     MT_F,     KC_G,                                   KC_H,     MT_J,     MT_K,       MT_L,     MT_SCLN,  KC_BSLS,
     OSM(MOD_LSFT),  MT_Z,     KC_X,     KC_C,     KC_V,     KC_B,   KC_MINS,              KC_EQL,   KC_N,     KC_M,     KC_COMM,    KC_DOT,   KC_SLSH,  OSM(MOD_RCTL),
     KC_LEFT,        KC_RGHT,  KC_HOME,  KC_ENT,   KC_SPC,                                                     KC_TAB,   KC_BSPC,    KC_END,   KC_DOWN,  KC_UP,
-                                        LCTL(KC_LALT),  LM(UPPER,MOD_LGUI),               LM(LOWER,MOD_RGUI), LSFT(KC_RGUI),
-                                                        LM(UPPER,MOD_LCTL),               LM(LOWER,MOD_RCTL),
-                                               OSL(LOWER), KC_DEL, KC_PGUP,               KC_PGDOWN, KC_ESC, OSL(UPPER)
+                                                            VMHOST, KC_CAPS,              TO(ADJUST), KC_MPLY,
+                                                                    KC_MPRV,              KC_MNXT,
+                                                OSL(LOWER), KC_DEL, KC_PGUP,              KC_PGDOWN, KC_ESC, OSL(UPPER)
   ),
   [LOWER] = LAYOUT_ergodox_pretty(
-    KC_CAPS, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
     _______, KC_F11,  KC_TILD, KC_MINS, KC_UNDS, KC_F11,  _______,          _______, KC_F12,  KC_PLUS, KC_EQL,  KC_GRV,  KC_F12,  _______,
     _______, KC_4,    KC_3,    KC_2,    KC_1,    KC_5,                               KC_6,    KC_0,    KC_9,    KC_8,    KC_7,    _______,
     _______, KC_DLR,  KC_HASH, KC_AT,   KC_EXLM, KC_PERC, _______,          _______, KC_CIRC, KC_COMM, KC_DOT,  KC_ASTR, KC_AMPR, _______,
     _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, TO(BASE),
                                                  _______, _______,          _______, _______,
-                                                          _______,          _______,
+                                                          KC_VOLD,          KC_VOLU,
                                        TO(NAVI), _______, _______,          _______, _______, TT(ADJUST)
   ),
   [UPPER] = LAYOUT_ergodox_pretty(
-    KC_CAPS, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,          _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
     _______, KC_LCBR, KC_LBRC, KC_LPRN, KC_DQUO, KC_PIPE,                            KC_BSLS, KC_QUOT, KC_RPRN, KC_RBRC, KC_RCBR, _______,
     _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,          _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_ESC,  KC_DEL, _______,
     _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, TO(BASE),
                                                  _______, _______,          _______, _______,
-                                                          _______,          _______,
+                                                          KC_VOLD,          KC_VOLU,
                                      TT(ADJUST), _______, _______,          _______, _______, TO(NUMPAD)
   ),
   [NAVI] = LAYOUT_ergodox_pretty(
