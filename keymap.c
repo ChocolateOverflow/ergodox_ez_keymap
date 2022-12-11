@@ -8,6 +8,8 @@
 #define MT_J MT(MOD_RSFT, KC_J)
 #define MT_K MT(MOD_RCTL, KC_K)
 #define MT_L MT(MOD_RGUI, KC_L)
+#define LT_V LT(LOWER, KC_V)
+#define LT_M LT(UPPER, KC_M)
 #define MT_SCLN MT(MOD_RALT, KC_SCLN)
 // VM host key
 #define VMHOST KC_RIGHT_CTRL
@@ -31,16 +33,16 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_ergodox_pretty(
     KC_LEAD,        KC_1,     KC_2,     KC_3,     KC_4,     KC_5,   KC_LBRC,              KC_RBRC,  KC_6,     KC_7,     KC_8,       KC_9,     KC_0,     KC_PSCR,
-    MOD_LGUI,       KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,   KC_TAB,               KC_ENT,   KC_Y,     KC_U,     KC_I,       KC_O,     KC_P,     MOD_LALT,
-    KC_GRV,         KC_A,     MT_S,     MT_D,     MT_F,     KC_G,                                   KC_H,     MT_J,     MT_K,       MT_L,     MT_SCLN,  KC_BSLS,
-    OSM(MOD_LSFT),  MT_Z,     KC_X,     KC_C,     KC_V,     KC_B,   KC_MINS,              KC_EQL,   KC_N,     KC_M,     KC_COMM,    KC_DOT,   KC_SLSH,  OSM(MOD_RCTL),
+    KC_LGUI,        KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,   KC_TAB,               KC_ENT,   KC_Y,     KC_U,     KC_I,       KC_O,     KC_P,     KC_LALT,
+    KC_ESC,         KC_A,     MT_S,     MT_D,     MT_F,     KC_G,                                   KC_H,     MT_J,     MT_K,       MT_L,     MT_SCLN,  KC_LEAD,
+    OSM(MOD_LSFT),  MT_Z,     KC_X,     KC_C,     LT_V,     KC_B,   KC_MINS,              KC_EQL,   KC_N,     LT_M,     KC_COMM,    KC_DOT,   KC_SLSH,  OSM(MOD_RCTL),
     KC_LEFT,        KC_RGHT,  KC_HOME,  KC_ENT,   KC_SPC,                                                     KC_TAB,   KC_BSPC,    KC_END,   KC_DOWN,  KC_UP,
-                                                            VMHOST, KC_CAPS,              TO(ADJUST), KC_MPLY,
+                                                            VMHOST, XXXXXXX,              XXXXXXX, KC_MPLY,
                                                                     KC_MPRV,              KC_MNXT,
-                                                OSL(LOWER), KC_DEL, KC_PGUP,              KC_PGDOWN, KC_ESC, OSL(UPPER)
+                                                OSL(LOWER), KC_DEL, KC_PGUP,              KC_PGDN, KC_ESC, OSL(UPPER)
   ),
   [LOWER] = LAYOUT_ergodox_pretty(
-    _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
+    KC_CAPS, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
     _______, KC_F11,  KC_TILD, KC_MINS, KC_UNDS, KC_F11,  _______,          _______, KC_F12,  KC_PLUS, KC_EQL,  KC_GRV,  KC_F12,  _______,
     _______, KC_4,    KC_3,    KC_2,    KC_1,    KC_5,                               KC_6,    KC_0,    KC_9,    KC_8,    KC_7,    _______,
     _______, KC_DLR,  KC_HASH, KC_AT,   KC_EXLM, KC_PERC, _______,          _______, KC_CIRC, KC_COMM, KC_DOT,  KC_ASTR, KC_AMPR, _______,
@@ -50,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                        TO(NAVI), _______, _______,          _______, _______, TT(ADJUST)
   ),
   [UPPER] = LAYOUT_ergodox_pretty(
-    _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
+    KC_CAPS, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,          _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
     _______, KC_LCBR, KC_LBRC, KC_LPRN, KC_DQUO, KC_PIPE,                            KC_BSLS, KC_QUOT, KC_RPRN, KC_RBRC, KC_RCBR, _______,
     _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,          _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_ESC,  KC_DEL, _______,
@@ -61,10 +63,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [NAVI] = LAYOUT_ergodox_pretty(
     _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
-    _______, KC_WH_U, KC_WH_L, KC_MS_U, KC_WH_R, _______, _______,          _______, _______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______,
-    _______, KC_WH_D, KC_MS_L, KC_MS_D, KC_MS_R, _______,                            KC_TAB,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-    _______, _______, KC_ACL0, KC_ACL1, KC_ACL2, _______, _______,          _______,S(KC_TAB),KC_BTN1, KC_BTN2, KC_BTN3, KC_APP,  _______,
-    _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, TO(BASE),
+    _______, KC_WH_U, KC_WH_L, KC_MS_U, KC_WH_R,S(KC_TAB),_______,          _______, KC_ENT,  KC_HOME, KC_PGDN, KC_PGUP, KC_END,  _______,
+    _______, KC_WH_D, KC_MS_L, KC_MS_D, KC_MS_R, KC_ENT,                             KC_TAB,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
+    _______, KC_ACL0, KC_ACL1, KC_ACL2, KC_SPC,  KC_TAB, _______,           _______,S(KC_TAB),KC_BTN1, KC_BTN2, KC_BTN3, KC_APP,  _______,
+    _______, _______, KC_BTN3, KC_BTN2, KC_BTN1,                                              KC_BTN1, KC_BTN2, KC_BTN3, _______, TO(BASE),
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
                                        TO(BASE), KC_BTN1, _______,          _______, KC_BTN2, TO(NUMPAD)
@@ -86,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, RGB_TOG, KC_MUTE, KC_VOLD, KC_VOLU, _______, _______,          _______, _______, KC_VOLD, KC_VOLU, KC_MUTE, RGB_TOG, _______,
     _______, RGB_VAI, KC_MPLY, KC_MPRV, KC_MNXT, _______,                            _______, KC_MPRV, KC_MNXT, KC_MPLY, RGB_VAI, _______,
     _______, RGB_VAD, WEBUSB,  KC_BRID, KC_BRIU, _______, _______,          _______, _______, KC_BRID, KC_BRIU, WEBUSB,  RGB_VAD, _______,
-    RESET,   _______, _______, _______, _______,                                              _______, _______, _______, _______, TO(BASE),
+    QK_BOOT, _______, _______, _______, _______,                                              _______, _______, _______, _______, TO(BASE),
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
                                        TO(BASE), _______, _______,          _______, _______, TO(BASE)
@@ -99,7 +101,7 @@ extern rgb_config_t rgb_matrix_config;
 
 void keyboard_post_init_user(void) { rgb_matrix_enable(); }
 
-const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
+const uint8_t PROGMEM ledmap[][RGB_MATRIX_LED_COUNT][3] = {
     // BASE
     [0] = {{0, 255, 255}, {0, 255, 255}, {0, 255, 255}, {0, 255, 255},
            {0, 255, 255}, {0, 255, 255}, {0, 255, 255}, {0, 255, 255},
@@ -158,10 +160,10 @@ const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
 
     // NUMPAD
     [4] = {{43, 255, 255},  {43, 255, 255}, {43, 255, 255},  {43, 255, 255},
-           {43, 255, 255},  {43, 255, 255}, {219, 255, 255}, {43, 255, 255},
-           {219, 255, 255}, {43, 255, 255}, {219, 255, 255}, {43, 255, 255},
-           {219, 255, 255}, {43, 255, 255}, {219, 255, 255}, {43, 255, 255},
-           {219, 255, 255}, {43, 255, 255}, {219, 255, 255}, {43, 255, 255},
+           {43, 255, 255},  {43, 255, 255}, {43, 255, 255},  {43, 255, 255},
+           {43, 255, 255},  {43, 255, 255}, {43, 255, 255},  {43, 255, 255},
+           {43, 255, 255},  {43, 255, 255}, {43, 255, 255},  {43, 255, 255},
+           {43, 255, 255},  {43, 255, 255}, {43, 255, 255},  {43, 255, 255},
            {43, 255, 255},  {43, 255, 255}, {43, 255, 255},  {43, 255, 255},
            {43, 255, 255},  {43, 255, 255}, {43, 255, 255},  {43, 255, 255},
            {43, 255, 255},  {43, 255, 255}, {43, 255, 255},  {43, 255, 255},
@@ -187,7 +189,7 @@ const uint8_t PROGMEM ledmap[][DRIVER_LED_TOTAL][3] = {
 };
 
 void set_layer_color(int layer) {
-  for (int i = 0; i < DRIVER_LED_TOTAL; i++) {
+  for (int i = 0; i < RGB_MATRIX_LED_COUNT; i++) {
     HSV hsv = {
         .h = pgm_read_byte(&ledmap[layer][i][0]),
         .s = pgm_read_byte(&ledmap[layer][i][1]),
@@ -203,8 +205,8 @@ void set_layer_color(int layer) {
   }
 }
 
-void rgb_matrix_indicators_user(void) {
-  if (keyboard_config.disable_layer_led) { return; }
+bool rgb_matrix_indicators_user(void) {
+  if (keyboard_config.disable_layer_led) { return false; }
   switch (biton32(layer_state)) {
     case 0:
       set_layer_color(0);
@@ -229,6 +231,7 @@ void rgb_matrix_indicators_user(void) {
         rgb_matrix_set_color_all(0, 0, 0);
       break;
   }
+  return true;
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
