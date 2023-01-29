@@ -1,6 +1,6 @@
 # My ErgoDox EZ config
 
-Last run with commit `57f9a2ad6d4537d5907c7a4289a5e19a5afdf809` of `qmk`
+Last run with commit `981f3c316cb1619aef554fbb2913c8d1b03b0d08` of `qmk`
 
 ```sh
 make ergodox_ez/glow:choco:flash

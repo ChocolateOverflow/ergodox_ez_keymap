@@ -3,9 +3,12 @@
 
 // base layer
 #define ALT_Z LALT_T(KC_Z)
-#define OS_SLS RGUI_T(KC_SLSH)
+#define ALT_SLS RALT_T(KC_SLSH)
 #define OS_X LGUI_T(KC_X)
-#define ALT_SCLN RALT_T(KC_SCLN)
+#define OS_SCLN LGUI_T(KC_SCLN)
+#define MT_COMM C_S_T(KC_COMM)
+#define C_S_C C_S_T(KC_C)
+#define C_S_V C_S_T(KC_V)
 // thumb cluster
 #define CT_ENT LCTL_T(KC_ENT)
 #define SH_SPC LSFT_T(KC_SPC)
@@ -28,8 +31,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_ergodox_pretty(
     KC_LEAD, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_LBRC,          KC_RBRC, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_PSCR,
     KC_LGUI, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_TAB,           KC_ENT,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_RALT,
-    KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    ALT_SCLN,KC_BSPC,
-    KC_LSFT, ALT_Z,   OS_X,    KC_C,    KC_V,    KC_B,    KC_MINS,          KC_EQL,  KC_N,    KC_M,    KC_COMM, KC_DOT,  OS_SLS,  KC_RCTL,
+    KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    OS_SCLN, KC_BSPC,
+    KC_LSFT, ALT_Z,   OS_X,    C_S_C,   C_S_V,   KC_B,    KC_MINS,          KC_EQL,  KC_N,    KC_M,    MT_COMM, KC_DOT,  ALT_SLS, KC_RCTL,
     KC_LEFT, KC_RGHT, KC_HOME, CT_ENT,  SH_SPC,                                               CT_TAB,  SH_BSPC, KC_END,  KC_DOWN, KC_UP,
                                                  KC_MPLY, XXXXXXX,          XXXXXXX, KC_MPLY,
                                                           KC_MPRV,          KC_MNXT,
@@ -37,13 +40,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [LOWER] = LAYOUT_ergodox_pretty(
     KC_CAPS, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
-    _______, KC_PGUP, KC_TILD, KC_MINS, KC_UNDS, KC_CAPS, _______,          _______, KC_CAPS, KC_PLUS, KC_EQL,  KC_GRV,  KC_PGDN, _______,
+    _______, KC_PGUP, KC_TILD, KC_MINS, KC_UNDS, VMHOST,  _______,          _______, KC_CAPS, KC_PLUS, KC_EQL,  KC_GRV,  KC_PGDN, _______,
     _______, KC_4,    KC_3,    KC_2,    KC_1,    KC_5,                               KC_6,    KC_0,    KC_9,    KC_8,    KC_7,    _______,
-    _______, KC_Q,    KC_HOME, KC_ESC,  KC_ENT,  CW_TOGG, _______,          _______, CW_TOGG, KC_BSPC, KC_DEL,  KC_END,  KC_P,    _______,
+    _______, KC_LGUI, CW_TOGG, KC_ESC,  KC_ENT,  KC_LEAD, _______,          _______, KC_LEAD, KC_BSPC, KC_DEL,  CW_TOGG, KC_LALT,  _______,
     _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, TO(BASE),
                                                  _______, _______,          _______, _______,
                                                           KC_VOLD,          KC_VOLU,
-                                       TO(NAVI), _______, _______,          _______, _______, KC_LEAD
+                                      TO(NAVI), _______, _______,          _______, _______, KC_END
   ),
   [UPPER] = LAYOUT_ergodox_pretty(
     KC_CAPS, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
@@ -53,14 +56,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, TO(BASE),
                                                  _______, _______,          _______, _______,
                                                           KC_VOLD,          KC_VOLU,
-                                        KC_LEAD, _______, _______,          _______, _______, TO(NUMPAD)
+                               KC_HOME, _______, _______,          _______, _______, TO(NUMPAD)
   ),
   [NAVI] = LAYOUT_ergodox_pretty(
     XXXXXXX, _______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, XXXXXXX,
     _______, KC_WH_L, KC_WH_R, KC_WH_U, KC_WH_D, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, KC_TAB,S(KC_TAB), KC_SPC,  XXXXXXX, _______,
-    _______, KC_APP,  KC_BTN3, KC_BTN2, KC_BTN1, XXXXXXX,                            KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_TAB,  _______,
+    _______, KC_APP,  KC_BTN3, KC_BTN2, KC_BTN1, KC_PSCR,                            KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_TAB,  _______,
     _______, KC_ENT,  KC_SPC,  S(KC_TAB),KC_TAB, XXXXXXX, XXXXXXX,          XXXXXXX, KC_ENT,  KC_HOME, KC_END,  KC_PGDN, KC_PGUP, _______,
-    QK_BOOT, XXXXXXX, _______, _______, _______,                                              _______, _______, _______, XXXXXXX, TO(BASE),
+    QK_BOOT, XXXXXXX, _______, KC_LCTL, KC_LSFT,                                              KC_RCTL, KC_RSFT, _______, XXXXXXX, TO(BASE),
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
                                        TO(BASE), _______, _______,          _______, _______, TO(BASE)
@@ -70,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, RGB_TOG, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX,          XXXXXXX, KC_COMM, KC_7,    KC_8,    KC_9,    KC_MINS, _______,
     _______, RGB_VAI, KC_MPLY, KC_MPRV, KC_MNXT, XXXXXXX,                            KC_0,    KC_4,    KC_5,    KC_6,    KC_ENT,  _______,
     _______, RGB_VAD, KC_LNUM, KC_BRID, KC_BRIU, XXXXXXX, XXXXXXX,          XXXXXXX, KC_DOT,  KC_1,    KC_2,    KC_3,    KC_EQL,  _______,
-    QK_BOOT, XXXXXXX, _______, _______, _______,                                              _______, _______, _______, XXXXXXX, TO(BASE),
+    QK_BOOT, XXXXXXX, _______, KC_LCTL, KC_LSFT,                                              KC_RCTL, KC_RSFT, _______, XXXXXXX, TO(BASE),
 
                                                 _______, _______,           _______, _______,
                                                          _______,           _______,
