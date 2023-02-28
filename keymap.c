@@ -19,6 +19,7 @@
 #define MT_END RSFT_T(KC_END)
 #define MT_PGDN RCTL_T(KC_PGDN)
 // mouse layer
+#define SCROLL TD(TD_SCROLL)
 #define TD_BTN4 TD(TD_MOUSE_4)
 #define TD_BTN5 TD(TD_MOUSE_5)
 
@@ -27,8 +28,8 @@ enum layers {
     LOWER,
     UPPER,
     MOUSE,
-    NUMPAD,
-    NAVI,
+    NUM,
+    NAV,
 };
 
 typedef struct {
@@ -38,8 +39,7 @@ typedef struct {
 
 static tap dance_state[4];
 enum tap_dance_codes {
-    TD_LOWER = 0,
-    TD_UPPER,
+    TD_SCROLL = 0,
     TD_MOUSE_4,
     TD_MOUSE_5,
 };
@@ -57,62 +57,62 @@ enum {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_ergodox_pretty(
-    KC_LEAD, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_LBRC,          KC_RBRC, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_PSCR,
+    XXXXXXX, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_LBRC,          KC_RBRC, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_PSCR,
     KC_LGUI, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_TAB,           KC_ENT,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_RALT,
     KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_BSPC,
     KC_LSFT, KC_Z,    MT_X,    MT_C,    MT_V,    KC_B,    KC_MINS,          KC_EQL,  KC_N,    MT_M,    MT_COMM, MT_DOT,  KC_SLSH, KC_RCTL,
     KC_LEFT, KC_RGHT, KC_HOME, SH_ENT,  CT_SPC,                                               SH_TAB,  CT_BSPC, KC_END,  KC_DOWN, KC_UP,
                                                  KC_MPLY, XXXXXXX,          XXXXXXX, KC_MPLY,
                                                           KC_MPRV,          KC_MNXT,
-                                    TD(TD_LOWER), KC_DEL, KC_PGUP,          KC_PGDN, KC_ESC, TD(TD_UPPER)
+                                      OSL(LOWER), KC_DEL, KC_PGUP,          KC_PGDN, KC_ESC, OSL(UPPER)
   ),
   [LOWER] = LAYOUT_ergodox_pretty(
-    _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
+    TO(BASE),_______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
     _______, KC_PSCR, KC_TILD, KC_MINS, KC_UNDS, KC_CAPS, _______,          _______, KC_CAPS, KC_PLUS, KC_EQL,  KC_GRV,  KC_PSCR, _______,
     _______, KC_4,    KC_3,    KC_2,    KC_1,    KC_5,                               KC_6,    KC_0,    KC_9,    KC_8,    KC_7,    _______,
-    _______, MT_PGUP, MT_HOME, KC_ENT,  KC_ESC,  KC_BTN4, _______,          _______, KC_BTN5, KC_BSPC, KC_DEL,  MT_END,  MT_PGDN, _______,
-    _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, TO(BASE),
+    _______, MT_PGUP, MT_HOME, KC_ENT,  KC_ESC,  TO(NAV), _______,          _______, TO(NUM), KC_BSPC, KC_DEL,  MT_END,  MT_PGDN, _______,
+    _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           KC_VOLD,          KC_VOLU,
                                       TO(MOUSE), _______, _______,          _______, _______, CW_TOGG
   ),
   [UPPER] = LAYOUT_ergodox_pretty(
-    _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
+    TO(BASE),_______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,          _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
     _______, KC_LCBR, KC_LBRC, KC_LPRN, KC_DQUO, KC_PIPE,                            KC_BSLS, KC_QUOT, KC_RPRN, KC_RBRC, KC_RCBR, _______,
     _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,          _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_F11,  KC_F12,  _______,
-    _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, TO(BASE),
+    _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           KC_VOLD,          KC_VOLU,
-                                        KC_LEAD, _______, _______,          _______, _______, TO(NUMPAD)
+                                        KC_LEAD, _______, _______,          _______, _______, TO(MOUSE)
   ),
   [MOUSE] = LAYOUT_ergodox_pretty(
-    XXXXXXX, _______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, XXXXXXX,
-    _______, KC_PGUP, KC_PGDN, S(KC_TAB),KC_TAB, KC_PSCR, XXXXXXX,          XXXXXXX, KC_PSCR, KC_TAB,S(KC_TAB), KC_PGDN, KC_PGUP, _______,
+    TO(BASE),_______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, QK_BOOT,
+    _______, KC_PGUP, KC_PGDN, S(KC_TAB),KC_TAB, SCROLL,  XXXXXXX,          XXXXXXX, SCROLL,  KC_TAB,S(KC_TAB), KC_PGDN, KC_PGUP, _______,
     _______, KC_WH_U, KC_WH_D, KC_BTN2, KC_BTN1, C(KC_V),                            C(KC_V), KC_BTN1, KC_BTN2, KC_WH_D, KC_WH_U, _______,
     _______, TD_BTN4, TD_BTN5, KC_ENT,  KC_BTN3, C(KC_C), XXXXXXX,          XXXXXXX, C(KC_C), KC_BTN3, KC_ENT,  TD_BTN4, TD_BTN5, _______,
-    QK_BOOT, XXXXXXX, _______, _______, _______,                                              _______, _______, _______, XXXXXXX, TO(BASE),
+    _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
                                        TO(BASE), _______, _______,          _______, _______, TO(BASE)
   ),
-  [NUMPAD] = LAYOUT_ergodox_pretty(
-    XXXXXXX, _______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, XXXXXXX,
+  [NUM] = LAYOUT_ergodox_pretty(
+    TO(BASE),_______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, QK_BOOT,
     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   XXXXXXX, XXXXXXX,          XXXXXXX, KC_COMM, KC_7,    KC_8,    KC_9,    KC_MINS, _______,
     _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,   XXXXXXX,                            KC_0,    KC_4,    KC_5,    KC_6,    KC_ENT,  _______,
     _______, KC_F9,   KC_F10,  KC_F11,  KC_F12,  XXXXXXX, XXXXXXX,          XXXXXXX, KC_DOT,  KC_1,    KC_2,    KC_3,    KC_EQL,  _______,
-    QK_BOOT, XXXXXXX, _______, SH_ENT,  CT_SPC,                                               SH_TAB,  CT_BSPC, _______, XXXXXXX, TO(BASE),
+    _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______,
 
                                                 _______, _______,           _______, _______,
                                                          _______,           _______,
                                       TO(BASE), _______, _______,           _______, _______, TO(BASE)
   ),
-  [NAVI] = LAYOUT_ergodox_pretty(
-    XXXXXXX, _______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, XXXXXXX,
+  [NAV] = LAYOUT_ergodox_pretty(
+    TO(BASE),_______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, QK_BOOT,
     _______, RGB_TOG, KC_MUTE, KC_VOLD, KC_VOLU, KC_PSCR, XXXXXXX,          XXXXXXX, KC_PSCR, KC_TAB,S(KC_TAB), KC_BTN4, KC_BTN5, _______,
     _______, RGB_VAI, KC_MPLY, KC_MPRV, KC_MNXT, KC_LGUI,                            KC_ENT,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
     _______, RGB_VAD, KC_LNUM, KC_BRID, KC_BRIU, KC_LALT, XXXXXXX,          XXXXXXX, KC_SPC,  KC_HOME, KC_END,  KC_PGDN, KC_PGUP, _______,
-    QK_BOOT, XXXXXXX, XXXXXXX, KC_LSFT, KC_LCTL,                                              KC_RSFT, KC_RCTL, XXXXXXX, XXXXXXX, TO(BASE),
+    _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______,
 
                                                 _______, _______,           _______, _______,
                                                          _______,           _______,
@@ -147,10 +147,10 @@ bool rgb_matrix_indicators_user(void) {
         case MOUSE:
             rgb_matrix_set_color_all(RGB_MAGENTA);
             break;
-        case NUMPAD:
+        case NUM:
             rgb_matrix_set_color_all(RGB_YELLOW);
             break;
-        case NAVI:
+        case NAV:
             rgb_matrix_set_color_all(RGB_CYAN);
             break;
         default:
@@ -177,11 +177,11 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         case MOUSE:
             ergodox_right_led_3_on();
             break;
-        case NUMPAD:
+        case NUM:
             ergodox_right_led_1_on();
             ergodox_right_led_2_on();
             break;
-        case NAVI:
+        case NAV:
             ergodox_right_led_2_on();
             ergodox_right_led_3_on();
             break;
@@ -216,66 +216,26 @@ uint8_t dance_step(qk_tap_dance_state_t *state) {
     return MORE_TAPS;
 }
 
-void td_lower_finished(qk_tap_dance_state_t *state, void *user_data) {
-    dance_state[TD_LOWER].step = dance_step(state);
-    switch (dance_state[TD_LOWER].step) {
+void td_scr_finished(qk_tap_dance_state_t *state, void *user_data) {
+    dance_state[TD_SCROLL].step = dance_step(state);
+    switch (dance_state[TD_SCROLL].step) {
         case SINGLE_TAP:
-            layer_move(MOUSE);
-            break;
-        case SINGLE_HOLD:
-            layer_on(LOWER);
+            tap_code(KC_NUM);
+            wait_ms(10);
+            tap_code(KC_NUM);
             break;
         case DOUBLE_TAP:
-            layer_move(NAVI);
+            tap_code16(S(KC_PSCR));
             break;
+        case SINGLE_HOLD:
         case DOUBLE_HOLD:
-            layer_on(NAVI);
+            tap_code16(KC_PSCR);
             break;
     }
 }
 
-void td_lower_reset(qk_tap_dance_state_t *state, void *user_data) {
-    wait_ms(10);
-    switch (dance_state[TD_LOWER].step) {
-        case SINGLE_HOLD:
-            layer_off(LOWER);
-            break;
-        case DOUBLE_HOLD:
-            layer_off(NAVI);
-            break;
-    }
-    dance_state[TD_LOWER].step = 0;
-}
-
-void td_upper_finished(qk_tap_dance_state_t *state, void *user_data) {
-    dance_state[TD_UPPER].step = dance_step(state);
-    switch (dance_state[TD_UPPER].step) {
-        case SINGLE_TAP:
-            layer_move(MOUSE);
-            break;
-        case SINGLE_HOLD:
-            layer_on(UPPER);
-            break;
-        case DOUBLE_TAP:
-            layer_move(NUMPAD);
-            break;
-        case DOUBLE_HOLD:
-            layer_on(NUMPAD);
-            break;
-    }
-}
-
-void td_upper_reset(qk_tap_dance_state_t *state, void *user_data) {
-    wait_ms(10);
-    switch (dance_state[TD_UPPER].step) {
-        case SINGLE_HOLD:
-            layer_off(UPPER);
-            break;
-        case DOUBLE_HOLD:
-            layer_off(NUMPAD);
-            break;
-    }
-    dance_state[TD_UPPER].step = 0;
+void td_scr_reset(qk_tap_dance_state_t *state, void *user_data) {
+    dance_state[TD_SCROLL].step = 0;
 }
 
 void td_btn4_finished(qk_tap_dance_state_t *state, void *user_data) {
@@ -337,8 +297,7 @@ void td_btn5_reset(qk_tap_dance_state_t *state, void *user_data) {
 }
 
 qk_tap_dance_action_t tap_dance_actions[] = {
-    [TD_LOWER] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_lower_finished, td_lower_reset),
-    [TD_UPPER] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_upper_finished, td_upper_reset),
+    [TD_SCROLL]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_scr_finished, td_scr_reset),
     [TD_MOUSE_4] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_btn4_finished, td_btn4_reset),
     [TD_MOUSE_5] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_btn5_finished, td_btn5_reset),
 };
