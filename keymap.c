@@ -86,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           KC_VOLD,          KC_VOLU,
-                                        KC_LEAD, _______, _______,          _______, _______, TO(MOUSE)
+                                        QK_LEAD, _______, _______,          _______, _______, TO(MOUSE)
   ),
   [MOUSE] = LAYOUT_ergodox_pretty(
     TO(BASE),_______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, QK_BOOT,
@@ -203,7 +203,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 /***** TAP DANCE *****/
 
-uint8_t dance_step(qk_tap_dance_state_t *state) {
+uint8_t dance_step(tap_dance_state_t *state) {
     if (state->count == 1) {
         if (state->pressed)
             return SINGLE_HOLD;
@@ -218,7 +218,7 @@ uint8_t dance_step(qk_tap_dance_state_t *state) {
     return MORE_TAPS;
 }
 
-static inline void td_tap_or_hold(qk_tap_dance_state_t *state, uint16_t tap_action, uint16_t hold_action) {
+static inline void td_tap_or_hold(tap_dance_state_t *state, uint16_t tap_action, uint16_t hold_action) {
     switch (dance_step(state)) {
         case SINGLE_TAP:
         case DOUBLE_TAP:
@@ -231,7 +231,7 @@ static inline void td_tap_or_hold(qk_tap_dance_state_t *state, uint16_t tap_acti
     }
 }
 
-static inline void td_single_or_double(qk_tap_dance_state_t *state, uint16_t single_tap_action, uint16_t double_tap_action) {
+static inline void td_single_or_double(tap_dance_state_t *state, uint16_t single_tap_action, uint16_t double_tap_action) {
     switch (dance_step(state)) {
         case SINGLE_TAP:
         case SINGLE_HOLD:
@@ -244,7 +244,7 @@ static inline void td_single_or_double(qk_tap_dance_state_t *state, uint16_t sin
     }
 }
 
-void td_scroll_screenshot_fn(qk_tap_dance_state_t *state, void *user_data) {
+void td_scroll_screenshot_fn(tap_dance_state_t *state, void *user_data) {
     switch (dance_step(state)) {
         case SINGLE_TAP:
             tap_code(KC_NUM);
@@ -261,31 +261,31 @@ void td_scroll_screenshot_fn(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void td_copy_cut_fn(qk_tap_dance_state_t *state, void *user_data) {
+void td_copy_cut_fn(tap_dance_state_t *state, void *user_data) {
     td_single_or_double(state, C(KC_C), C(KC_X));
 }
 
-void td_enter_esc_fn(qk_tap_dance_state_t *state, void *user_data) {
+void td_enter_esc_fn(tap_dance_state_t *state, void *user_data) {
     td_single_or_double(state, KC_ENT, KC_ESC);
 }
 
-void td_undo_redo_fn(qk_tap_dance_state_t *state, void *user_data) {
+void td_undo_redo_fn(tap_dance_state_t *state, void *user_data) {
     td_single_or_double(state, C(KC_Z), C(KC_Y));
 }
 
-void td_tab_ca(qk_tap_dance_state_t *state, void *user_data) {
+void td_tab_ca(tap_dance_state_t *state, void *user_data) {
     td_single_or_double(state, KC_TAB, C(KC_A));
 }
 
-void td_btn4_fn(qk_tap_dance_state_t *state, void *user_data) {
+void td_btn4_fn(tap_dance_state_t *state, void *user_data) {
     td_single_or_double(state, KC_BTN4, KC_WH_L);
 }
 
-void td_btn5_fn(qk_tap_dance_state_t *state, void *user_data) {
+void td_btn5_fn(tap_dance_state_t *state, void *user_data) {
     td_single_or_double(state, KC_BTN5, KC_WH_R);
 }
 
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
     [TD_SCROLL_SCREENSHOT] = ACTION_TAP_DANCE_FN(td_scroll_screenshot_fn), //
     [TD_COPY_CUT]          = ACTION_TAP_DANCE_FN(td_copy_cut_fn),          //
     [TD_ENTER_ESC]         = ACTION_TAP_DANCE_FN(td_enter_esc_fn),         //
@@ -297,60 +297,40 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 /***** LEADER MACROS *****/
 
-LEADER_EXTERNS();
-void matrix_scan_user(void) {
-    LEADER_DICTIONARY() {
-        leading = false;
-        leader_end();
-
-        SEQ_ONE_KEY(KC_B) {
-            SEND_STRING("#!/bin/bash\n\n");
-        }
-        SEQ_ONE_KEY(KC_H) {
-            SEND_STRING("python3 -m http.server\n");
-        }
-        SEQ_ONE_KEY(KC_L) {
-            SEND_STRING("nc -lnvp ");
-        }
-        SEQ_ONE_KEY(KC_P) {
-            SEND_STRING("#!/usr/bin/python3\n\n");
-        }
-        SEQ_TWO_KEYS(KC_D, KC_T) {
-            SEND_STRING("../../../../../../etc/passwd");
-        }
-        SEQ_TWO_KEYS(KC_H, KC_P) {
-            SEND_STRING("python3 -m http.server ");
-        }
-        SEQ_TWO_KEYS(KC_L, KC_H) {
-            SEND_STRING("127.0.0.1");
-        }
-        SEQ_TWO_KEYS(KC_P, KC_S) {
-            SEND_STRING("ps aux --forest\n");
-        }
-        SEQ_TWO_KEYS(KC_S, KC_S) {
-            SEND_STRING("ss -lntp\n");
-        }
-        SEQ_TWO_KEYS(KC_X, KC_T) {
-            SEND_STRING("export TERM=xterm\n");
-        }
-        SEQ_TWO_KEYS(KC_P, KC_B) {
-            SEND_STRING("php://filter/convert.base64-encode/resource=");
-        }
-        SEQ_TWO_KEYS(KC_P, KC_T) {
-            SEND_STRING("python3 -c \"import pty; pty.spawn('/bin/bash')\"\n");
-        }
-        SEQ_TWO_KEYS(KC_Z, KC_T) {
-            SEND_STRING(SS_LCTL("z"));
-            SEND_STRING(SS_DELAY(100));
-            SEND_STRING("stty raw -echo; fg\n\n");
-            SEND_STRING(SS_DELAY(100));
-            SEND_STRING("export TERM=xterm\n");
-        }
-        SEQ_THREE_KEYS(KC_X, KC_S, KC_S) {
-            SEND_STRING("<script>alert(window.origin)</script>");
-        }
-        SEQ_FOUR_KEYS(KC_S, KC_U, KC_I, KC_D) {
-            SEND_STRING("find / -perm -4000 2>/dev/null\n");
-        }
+void leader_end_user(void) {
+    if (leader_sequence_one_key(KC_B)) {
+        SEND_STRING("#!/bin/bash\n\n");
+    } else if (leader_sequence_one_key(KC_H)) {
+        SEND_STRING("python3 -m http.server\n");
+    } else if (leader_sequence_one_key(KC_L)) {
+        SEND_STRING("nc -lnvp ");
+    } else if (leader_sequence_one_key(KC_P)) {
+        SEND_STRING("#!/usr/bin/python3\n\n");
+    } else if (leader_sequence_two_keys(KC_D, KC_T)) {
+        SEND_STRING("../../../../../../etc/passwd");
+    } else if (leader_sequence_two_keys(KC_H, KC_P)) {
+        SEND_STRING("python3 -m http.server ");
+    } else if (leader_sequence_two_keys(KC_L, KC_H)) {
+        SEND_STRING("127.0.0.1");
+    } else if (leader_sequence_two_keys(KC_P, KC_S)) {
+        SEND_STRING("ps aux --forest\n");
+    } else if (leader_sequence_two_keys(KC_S, KC_S)) {
+        SEND_STRING("ss -lntp\n");
+    } else if (leader_sequence_two_keys(KC_X, KC_T)) {
+        SEND_STRING("export TERM=xterm\n");
+    } else if (leader_sequence_two_keys(KC_P, KC_B)) {
+        SEND_STRING("php://filter/convert.base64-encode/resource=");
+    } else if (leader_sequence_two_keys(KC_P, KC_T)) {
+        SEND_STRING("python3 -c \"import pty; pty.spawn('/bin/bash')\"\n");
+    } else if (leader_sequence_two_keys(KC_Z, KC_T)) {
+        SEND_STRING(SS_LCTL("z"));
+        SEND_STRING(SS_DELAY(100));
+        SEND_STRING("stty raw -echo; fg\n\n");
+        SEND_STRING(SS_DELAY(100));
+        SEND_STRING("export TERM=xterm\n");
+    } else if (leader_sequence_three_keys(KC_X, KC_S, KC_S)) {
+        SEND_STRING("<script>alert(window.origin)</script>");
+    } else if (leader_sequence_four_keys(KC_S, KC_U, KC_I, KC_D)) {
+        SEND_STRING("find / -perm -4000 2>/dev/null\n");
     }
 }

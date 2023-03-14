@@ -1,3 +1,3 @@
 # My ErgoDox EZ config
 
-Last run with commit `981f3c316cb1619aef554fbb2913c8d1b03b0d08` of `qmk`
+Last run with commit `4283e69ac74c8f85539ede9bd4bec0da1a56d134` of `qmk`
