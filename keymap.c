@@ -19,7 +19,11 @@
 #define MT_END RSFT_T(KC_END)
 #define MT_PGDN RCTL_T(KC_PGDN)
 // mouse layer
-#define SCROLL TD(TD_SCROLL)
+#define TD_SCR TD(TD_SCROLL_SCREENSHOT)
+#define TD_COPY TD(TD_COPY_CUT)
+#define TD_ENT TD(TD_ENTER_ESC)
+#define TD_UNDO TD(TD_UNDO_REDO)
+#define TD_TAB TD(TD_TAB_CA)
 #define TD_BTN4 TD(TD_MOUSE_4)
 #define TD_BTN5 TD(TD_MOUSE_5)
 
@@ -32,20 +36,18 @@ enum layers {
     NAV,
 };
 
-typedef struct {
-    bool    is_press_action;
-    uint8_t step;
-} tap;
-
-static tap dance_state[4];
 enum tap_dance_codes {
-    TD_SCROLL = 0,
+    TD_SCROLL_SCREENSHOT = 0,
+    TD_COPY_CUT,
+    TD_ENTER_ESC,
+    TD_UNDO_REDO,
+    TD_TAB_CA,
     TD_MOUSE_4,
     TD_MOUSE_5,
 };
 
 enum {
-    SINGLE_TAP = 1,
+    SINGLE_TAP = 0,
     SINGLE_HOLD,
     DOUBLE_TAP,
     DOUBLE_HOLD,
@@ -88,9 +90,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [MOUSE] = LAYOUT_ergodox_pretty(
     TO(BASE),_______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, QK_BOOT,
-    _______, KC_PGUP, KC_PGDN, S(KC_TAB),KC_TAB, SCROLL,  XXXXXXX,          XXXXXXX, SCROLL,  KC_TAB,S(KC_TAB), KC_PGDN, KC_PGUP, _______,
+    _______, KC_PGUP, KC_PGDN, TD_TAB,  TD_UNDO, TD_SCR,  TO(NAV),          TO(NAV), TD_SCR,  TD_UNDO, TD_TAB, KC_PGDN, KC_PGUP, _______,
     _______, KC_WH_U, KC_WH_D, KC_BTN2, KC_BTN1, C(KC_V),                            C(KC_V), KC_BTN1, KC_BTN2, KC_WH_D, KC_WH_U, _______,
-    _______, TD_BTN4, TD_BTN5, KC_ENT,  KC_BTN3, C(KC_C), XXXXXXX,          XXXXXXX, C(KC_C), KC_BTN3, KC_ENT,  TD_BTN4, TD_BTN5, _______,
+    _______, TD_BTN4, TD_BTN5, TD_ENT,  KC_BTN3, TD_COPY, TO(NUM),          TO(NUM), TD_COPY, KC_BTN3, TD_ENT,  TD_BTN4, TD_BTN5, _______,
     _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
@@ -98,9 +100,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [NUM] = LAYOUT_ergodox_pretty(
     TO(BASE),_______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, QK_BOOT,
-    _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   XXXXXXX, XXXXXXX,          XXXXXXX, KC_COMM, KC_7,    KC_8,    KC_9,    KC_MINS, _______,
+    _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   XXXXXXX, TO(NAV),          TO(NAV), KC_COMM, KC_7,    KC_8,    KC_9,    KC_MINS, _______,
     _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,   XXXXXXX,                            KC_0,    KC_4,    KC_5,    KC_6,    KC_ENT,  _______,
-    _______, KC_F9,   KC_F10,  KC_F11,  KC_F12,  XXXXXXX, XXXXXXX,          XXXXXXX, KC_DOT,  KC_1,    KC_2,    KC_3,    KC_EQL,  _______,
+    _______, KC_F9,   KC_F10,  KC_F11,  KC_F12,  XXXXXXX, TO(MOUSE),      TO(MOUSE), KC_DOT,  KC_1,    KC_2,    KC_3,    KC_EQL,  _______,
     _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______,
 
                                                 _______, _______,           _______, _______,
@@ -109,9 +111,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [NAV] = LAYOUT_ergodox_pretty(
     TO(BASE),_______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, QK_BOOT,
-    _______, RGB_TOG, KC_MUTE, KC_VOLD, KC_VOLU, KC_PSCR, XXXXXXX,          XXXXXXX, KC_PSCR, KC_TAB,S(KC_TAB), KC_BTN4, KC_BTN5, _______,
+    _______, RGB_TOG, KC_MUTE, KC_VOLD, KC_VOLU, KC_PSCR, TO(MOUSE),      TO(MOUSE), KC_PSCR, KC_TAB,S(KC_TAB), KC_BTN4, KC_BTN5, _______,
     _______, RGB_VAI, KC_MPLY, KC_MPRV, KC_MNXT, KC_LGUI,                            KC_ENT,  KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______,
-    _______, RGB_VAD, KC_LNUM, KC_BRID, KC_BRIU, KC_LALT, XXXXXXX,          XXXXXXX, KC_SPC,  KC_HOME, KC_END,  KC_PGDN, KC_PGUP, _______,
+    _______, RGB_VAD, KC_LNUM, KC_BRID, KC_BRIU, KC_LALT, TO(NUM),          TO(NUM), KC_SPC,  KC_HOME, KC_END,  KC_PGDN, KC_PGUP, _______,
     _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______,
 
                                                 _______, _______,           _______, _______,
@@ -216,9 +218,34 @@ uint8_t dance_step(qk_tap_dance_state_t *state) {
     return MORE_TAPS;
 }
 
-void td_scr_finished(qk_tap_dance_state_t *state, void *user_data) {
-    dance_state[TD_SCROLL].step = dance_step(state);
-    switch (dance_state[TD_SCROLL].step) {
+static inline void td_tap_or_hold(qk_tap_dance_state_t *state, uint16_t tap_action, uint16_t hold_action) {
+    switch (dance_step(state)) {
+        case SINGLE_TAP:
+        case DOUBLE_TAP:
+            tap_code16(tap_action);
+            break;
+        case SINGLE_HOLD:
+        case DOUBLE_HOLD:
+            tap_code16(hold_action);
+            break;
+    }
+}
+
+static inline void td_single_or_double(qk_tap_dance_state_t *state, uint16_t single_tap_action, uint16_t double_tap_action) {
+    switch (dance_step(state)) {
+        case SINGLE_TAP:
+        case SINGLE_HOLD:
+            tap_code16(single_tap_action);
+            break;
+        case DOUBLE_TAP:
+        case DOUBLE_HOLD:
+            tap_code16(double_tap_action);
+            break;
+    }
+}
+
+void td_scroll_screenshot_fn(qk_tap_dance_state_t *state, void *user_data) {
+    switch (dance_step(state)) {
         case SINGLE_TAP:
             tap_code(KC_NUM);
             wait_ms(10);
@@ -234,72 +261,38 @@ void td_scr_finished(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void td_scr_reset(qk_tap_dance_state_t *state, void *user_data) {
-    dance_state[TD_SCROLL].step = 0;
+void td_copy_cut_fn(qk_tap_dance_state_t *state, void *user_data) {
+    td_single_or_double(state, C(KC_C), C(KC_X));
 }
 
-void td_btn4_finished(qk_tap_dance_state_t *state, void *user_data) {
-    dance_state[TD_MOUSE_4].step = dance_step(state);
-    switch (dance_state[TD_MOUSE_4].step) {
-        case SINGLE_TAP:
-        case DOUBLE_TAP:
-            register_code16(KC_BTN4);
-            break;
-        case SINGLE_HOLD:
-        case DOUBLE_HOLD:
-            register_code16(KC_WH_L);
-            break;
-    }
+void td_enter_esc_fn(qk_tap_dance_state_t *state, void *user_data) {
+    td_single_or_double(state, KC_ENT, KC_ESC);
 }
 
-void td_btn4_reset(qk_tap_dance_state_t *state, void *user_data) {
-    wait_ms(10);
-    switch (dance_state[TD_MOUSE_4].step) {
-        case SINGLE_TAP:
-        case DOUBLE_TAP:
-            unregister_code16(KC_BTN4);
-            break;
-        case SINGLE_HOLD:
-        case DOUBLE_HOLD:
-            unregister_code16(KC_WH_L);
-            break;
-    }
-    dance_state[TD_MOUSE_4].step = 0;
+void td_undo_redo_fn(qk_tap_dance_state_t *state, void *user_data) {
+    td_single_or_double(state, C(KC_Z), C(KC_Y));
 }
 
-void td_btn5_finished(qk_tap_dance_state_t *state, void *user_data) {
-    dance_state[TD_MOUSE_5].step = dance_step(state);
-    switch (dance_state[TD_MOUSE_5].step) {
-        case SINGLE_TAP:
-        case DOUBLE_TAP:
-            register_code16(KC_BTN5);
-            break;
-        case SINGLE_HOLD:
-        case DOUBLE_HOLD:
-            register_code16(KC_WH_R);
-            break;
-    }
+void td_tab_ca(qk_tap_dance_state_t *state, void *user_data) {
+    td_single_or_double(state, KC_TAB, C(KC_A));
 }
 
-void td_btn5_reset(qk_tap_dance_state_t *state, void *user_data) {
-    wait_ms(10);
-    switch (dance_state[TD_MOUSE_5].step) {
-        case SINGLE_TAP:
-        case DOUBLE_TAP:
-            unregister_code16(KC_BTN5);
-            break;
-        case SINGLE_HOLD:
-        case DOUBLE_HOLD:
-            unregister_code16(KC_WH_R);
-            break;
-    }
-    dance_state[TD_MOUSE_5].step = 0;
+void td_btn4_fn(qk_tap_dance_state_t *state, void *user_data) {
+    td_single_or_double(state, KC_BTN4, KC_WH_L);
+}
+
+void td_btn5_fn(qk_tap_dance_state_t *state, void *user_data) {
+    td_single_or_double(state, KC_BTN5, KC_WH_R);
 }
 
 qk_tap_dance_action_t tap_dance_actions[] = {
-    [TD_SCROLL]  = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_scr_finished, td_scr_reset),
-    [TD_MOUSE_4] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_btn4_finished, td_btn4_reset),
-    [TD_MOUSE_5] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_btn5_finished, td_btn5_reset),
+    [TD_SCROLL_SCREENSHOT] = ACTION_TAP_DANCE_FN(td_scroll_screenshot_fn), //
+    [TD_COPY_CUT]          = ACTION_TAP_DANCE_FN(td_copy_cut_fn),          //
+    [TD_ENTER_ESC]         = ACTION_TAP_DANCE_FN(td_enter_esc_fn),         //
+    [TD_UNDO_REDO]         = ACTION_TAP_DANCE_FN(td_undo_redo_fn),         //
+    [TD_TAB_CA]            = ACTION_TAP_DANCE_FN(td_tab_ca),               //
+    [TD_MOUSE_4]           = ACTION_TAP_DANCE_FN(td_btn4_fn),              //
+    [TD_MOUSE_5]           = ACTION_TAP_DANCE_FN(td_btn5_fn),              //
 };
 
 /***** LEADER MACROS *****/
