@@ -2,12 +2,14 @@
 #include "version.h"
 
 // base layer
-#define MT_X C_S_T(KC_X)
-#define MT_C LALT_T(KC_C)
-#define MT_V LGUI_T(KC_V)
-#define MT_M RGUI_T(KC_M)
-#define MT_COMM RALT_T(KC_COMM)
-#define MT_DOT C_S_T(KC_DOT)
+#define MT_Z ALT_T(KC_Z)
+#define MT_X LGUI_T(KC_X)
+#define MT_C LCTL_T(KC_C)
+#define MT_V LSFT_T(KC_V)
+#define MT_M RSFT_T(KC_M)
+#define MT_COMM RSFT_T(KC_COMM)
+#define MT_DOT RGUI_T(KC_DOT)
+#define MT_SLSH RALT_T(KC_SLSH)
 // thumb cluster
 #define SH_ENT LSFT_T(KC_ENT)
 #define CT_SPC LCTL_T(KC_SPC)
@@ -62,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_LBRC,          KC_RBRC, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_PSCR,
     KC_LGUI, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_TAB,           KC_ENT,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_RALT,
     KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                               KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_BSPC,
-    KC_LSFT, KC_Z,    MT_X,    MT_C,    MT_V,    KC_B,    KC_MINS,          KC_EQL,  KC_N,    MT_M,    MT_COMM, MT_DOT,  KC_SLSH, KC_RCTL,
+    KC_LSFT, MT_Z,    MT_X,    MT_C,    MT_V,    KC_B,    KC_MINS,          KC_EQL,  KC_N,    MT_M,    MT_COMM, MT_DOT,  MT_SLSH, KC_RCTL,
     KC_LEFT, KC_RGHT, KC_HOME, SH_ENT,  CT_SPC,                                               SH_TAB,  CT_BSPC, KC_END,  KC_DOWN, KC_UP,
                                                  KC_MPLY, XXXXXXX,          XXXXXXX, KC_MPLY,
                                                           KC_MPRV,          KC_MNXT,
@@ -90,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [MOUSE] = LAYOUT_ergodox_pretty(
     TO(BASE),_______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, QK_BOOT,
-    _______, KC_PGUP, KC_PGDN, TD_TAB,  TD_UNDO, TD_SCR,  TO(NAV),          TO(NAV), TD_SCR,  TD_UNDO, TD_TAB, KC_PGDN, KC_PGUP, _______,
+    _______, KC_PGUP, KC_PGDN, TD_TAB,  TD_UNDO, TD_SCR,  TO(NAV),          TO(NAV), TD_SCR,  TD_UNDO, TD_TAB,  KC_PGDN, KC_PGUP, _______,
     _______, KC_WH_U, KC_WH_D, KC_BTN2, KC_BTN1, C(KC_V),                            C(KC_V), KC_BTN1, KC_BTN2, KC_WH_D, KC_WH_U, _______,
     _______, TD_BTN4, TD_BTN5, TD_ENT,  KC_BTN3, TD_COPY, TO(NUM),          TO(NUM), TD_COPY, KC_BTN3, TD_ENT,  TD_BTN4, TD_BTN5, _______,
     _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______,
