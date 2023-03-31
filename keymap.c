@@ -7,9 +7,9 @@
 #define MT_C LCTL_T(KC_C)
 #define MT_V LSFT_T(KC_V)
 #define MT_M RSFT_T(KC_M)
-#define MT_COMM RSFT_T(KC_COMM)
+#define MT_COMM RCTL_T(KC_COMM)
 #define MT_DOT RGUI_T(KC_DOT)
-#define MT_SLSH RALT_T(KC_SLSH)
+#define MT_SLSH LALT_T(KC_SLSH)
 // thumb cluster
 #define SH_ENT LSFT_T(KC_ENT)
 #define CT_SPC LCTL_T(KC_SPC)
