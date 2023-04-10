@@ -24,6 +24,10 @@
 #define MT_END RSFT_T(KC_END)
 #define MT_PGDN RCTL_T(KC_PGDN)
 // mouse layer
+#define CT_ENT LCTL_T(KC_ENT)
+#define SH_SPC LSFT_T(KC_SPC)
+#define SH_TAB LSFT_T(KC_TAB)
+#define CT_BSPC LCTL_T(KC_BSPC)
 #define TD_SCR TD(TD_SCROLL_SCREENSHOT)
 #define TD_COPY TD(TD_COPY_CUT)
 #define TD_ENT TD(TD_ENTER_ESC)
@@ -82,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_PSCR, KC_TILD, KC_MINS, KC_UNDS, KC_CAPS, _______,          _______, KC_CAPS, KC_PLUS, KC_EQL,  KC_GRV,  KC_PSCR, _______,
     _______, KC_4,    KC_3,    KC_2,    KC_1,    KC_5,                               KC_6,    KC_0,    KC_9,    KC_8,    KC_7,    _______,
     _______, MT_PGUP, MT_HOME, KC_ENT,  KC_ESC,  _______, _______,          _______, _______, KC_BSPC, KC_DEL,  MT_END,  MT_PGDN, _______,
-    _______, _______, _______, _______, _______,                                              CW_TOGG, _______, _______, _______, _______,
+    _______, _______, _______, XXXXXXX, XXXXXXX,                                              CW_TOGG, XXXXXXX, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           KC_VOLD,          KC_VOLU,
                                         _______, _______, _______,          _______, _______, _______
@@ -93,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,          _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
     _______, KC_LBRC, KC_LCBR, KC_LPRN, KC_DQUO, KC_PIPE,                            KC_BSLS, KC_QUOT, KC_RPRN, KC_RCBR, KC_RBRC, _______,
     _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______,          _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_F11,  KC_F12,  _______,
-    _______, _______, _______, _______, QK_LEAD,                                              _______, _______, _______, _______, _______,
+    _______, _______, _______, XXXXXXX, QK_LEAD,                                              XXXXXXX, XXXXXXX, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           KC_VOLD,          KC_VOLU,
                                         _______, _______, _______,          _______, _______, _______
@@ -104,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,          _______, KC_PSCR, KC_TAB,S(KC_TAB), KC_BTN4, KC_BTN5, _______,
     _______, KC_LALT, KC_LGUI, KC_LCTL, KC_LSFT, XXXXXXX,                            KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_ENT,  _______,
     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,          _______, KC_SPC,  KC_HOME, KC_END,  KC_PGDN, KC_PGUP, _______,
-    _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______,
+    _______, _______, _______, XXXXXXX, XXXXXXX,                                              XXXXXXX, XXXXXXX, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
                                       TO(MOUSE), _______, _______,          _______, _______, CW_TOGG
@@ -115,7 +119,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, _______,          _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
     _______, XXXXXXX, KC_MPLY, KC_MPRV, KC_MNXT, XXXXXXX,                            XXXXXXX, KC_LSFT, KC_LCTL, KC_LGUI, KC_LALT, _______,
     _______, XXXXXXX, KC_LNUM, KC_BRID, KC_BRIU, XXXXXXX, _______,          _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
-    _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______,
+    _______, _______, _______, XXXXXXX, XXXXXXX,                                              XXXXXXX, XXXXXXX, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
                                         QK_LEAD, _______, _______,          _______, _______, TO(MOUSE)
@@ -124,9 +128,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NUM] = LAYOUT_ergodox_pretty(
     TO(BASE),_______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, _______,
     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,          _______, KC_COMM, KC_7,    KC_8,    KC_9,    KC_MINS, _______,
-    _______, KC_LALT, KC_LGUI, KC_LCTL, KC_LSFT, TO(NUM),                            KC_0,    KC_4,    KC_5,    KC_6,    KC_ENT,  _______,
-    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,          _______, KC_DOT,  KC_1,    KC_2,    KC_3,    KC_EQL,  _______,
-    _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______,
+    _______, KC_LALT, KC_LGUI, KC_LCTL, KC_LSFT, XXXXXXX,                            KC_0,    KC_4,    KC_5,    KC_6,    KC_ENT,  _______,
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TO(NUM), _______,          _______, KC_DOT,  KC_1,    KC_2,    KC_3,    KC_EQL,  _______,
+    _______, _______, _______, XXXXXXX, XXXXXXX,                                              XXXXXXX, XXXXXXX, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
                                        TO(BASE), _______, _______,          _______, _______, TO(BASE)
@@ -135,9 +139,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [FN] = LAYOUT_ergodox_pretty(
     TO(BASE),_______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, _______,
     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   XXXXXXX, _______,          _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
-    _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,   XXXXXXX,                            TO(FN),  KC_LSFT, KC_LCTL, KC_LGUI, KC_LALT, _______,
-    _______, KC_F9,   KC_F10,  KC_F11,  KC_F12,  XXXXXXX, _______,          _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
-    _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______,
+    _______, KC_F5,   KC_F6,   KC_F7,   KC_F8,   XXXXXXX,                            XXXXXXX, KC_LSFT, KC_LCTL, KC_LGUI, KC_LALT, _______,
+    _______, KC_F9,   KC_F10,  KC_F11,  KC_F12,  XXXXXXX, _______,          _______, TO(FN),  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+    _______, _______, _______, XXXXXXX, XXXXXXX,                                              XXXXXXX, XXXXXXX, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
                                        TO(BASE), _______, _______,          _______, _______, TO(BASE)
@@ -145,10 +149,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [MOUSE] = LAYOUT_ergodox_pretty(
     TO(BASE),_______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, QK_BOOT,
-    _______, KC_PGUP, KC_PGDN, TD_TAB,  TD_UNDO, TD_SCR,  _______,          _______, TD_SCR,  TD_UNDO, TD_TAB,  KC_PGDN, KC_PGUP, _______,
-    _______, KC_WH_U, KC_WH_D, KC_BTN2, KC_BTN1, C(KC_V),                            C(KC_V), KC_BTN1, KC_BTN2, KC_WH_D, KC_WH_U, _______,
-    _______, TD_BTN4, TD_BTN5, TD_ENT,  KC_BTN3, TD_COPY, _______,          _______, TD_COPY, KC_BTN3, TD_ENT,  TD_BTN4, TD_BTN5, _______,
-    _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______,
+    KC_LGUI, KC_PGUP, KC_PGDN, TD_TAB,  TD_UNDO, TD_SCR,  _______,          _______, TD_SCR,  TD_UNDO, TD_TAB,  KC_PGDN, KC_PGUP, KC_LGUI,
+    KC_LCTL, KC_WH_U, KC_WH_D, KC_BTN2, KC_BTN1, C(KC_V),                            C(KC_V), KC_BTN1, KC_BTN2, KC_WH_D, KC_WH_U, KC_LCTL,
+    KC_LSFT, TD_BTN4, TD_BTN5, TD_ENT,  KC_BTN3, TD_COPY, _______,          _______, TD_COPY, KC_BTN3, TD_ENT,  TD_BTN4, TD_BTN5, KC_LSFT,
+    _______, _______, _______, CT_ENT,  SH_SPC,                                               SH_TAB,  CT_BSPC, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
                                        TO(BASE), _______, _______,          _______, _______, TO(BASE)
