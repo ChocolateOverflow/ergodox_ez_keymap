@@ -12,10 +12,10 @@
 #define MT_L LGUI_T(KC_L)
 #define MT_SCLN LALT_T(KC_SCLN)
 // thumb cluster
-#define LT_ENT LT(NAV, KC_ENT)
+#define NAV_ENT LT(NAV, KC_ENT)
 #define MT_SPC LCTL_T(KC_SPC)
 #define MT_TAB LSFT_T(KC_TAB)
-#define LT_BSPC LT(FN, KC_BSPC)
+#define FN_BSPC LT(FN, KC_BSPC)
 // NUMPLUS layer home row mods
 #define MT_4 LALT_T(KC_4)
 #define MT_3 LGUI_T(KC_3)
@@ -25,11 +25,14 @@
 #define MT_9 LCTL_T(KC_9)
 #define MT_8 LALT_T(KC_8)
 #define MT_7 LGUI_T(KC_7)
+// Layer access
+#define LT_NUM LT(NUMPAD, KC_F12)
+#define LT_MED LT(MED, KC_F12)
 // mouse layer
 #define CT_ENT LCTL_T(KC_ENT)
 #define SH_SPC LSFT_T(KC_SPC)
 #define SH_TAB LSFT_T(KC_TAB)
-#define CT_BSPC LCTL_T(KC_BSPC)
+#define CT_DEL LCTL_T(KC_DEL)
 #define TD_SCR TD(TD_SCROLL_SCREENSHOT)
 #define TD_ENT TD(TD_ENTER_ESC)
 #define TD_BTN45 TD(TD_MOUSE_45)
@@ -40,7 +43,7 @@ enum layers {
     SYMBOL,
     NAV,
     FN,
-    NUM,
+    NUMPAD,
     MED,
     MOUSE,
 };
@@ -69,7 +72,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LGUI, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_TAB,           KC_ENT,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LALT,
     KC_ESC,  KC_A,    KC_S,    MT_D,    MT_F,    KC_G,                               KC_H,    MT_J,    MT_K,    MT_L,    MT_SCLN, KC_BSPC,
     KC_LSFT, MT_Z,    MT_X,    KC_C,    KC_V,    KC_B,    KC_BSPC,          KC_SPC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RCTL,
-    KC_LEFT, KC_RGHT, KC_HOME, LT_ENT,  MT_SPC,                                               MT_TAB,  LT_BSPC, KC_END,  KC_DOWN, KC_UP,
+    KC_LEFT, KC_RGHT, KC_HOME, NAV_ENT, MT_SPC,                                               MT_TAB,  FN_BSPC, KC_END,  KC_DOWN, KC_UP,
                                                  KC_MPLY, XXXXXXX,          XXXXXXX, KC_MPLY,
                                                           KC_MPRV,          KC_MNXT,
                                     OSL(NUMPLUS), KC_DEL, KC_PGUP,          KC_PGDN, KC_ESC, OSL(SYMBOL)
@@ -79,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     TO(BASE),_______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,          _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
     _______, MT_4,    MT_3,    MT_2,    MT_1,    KC_5,                               KC_6,    MT_0,    MT_9,    MT_8,    MT_7,    _______,
-    _______, KC_F12,  KC_F11,  KC_ESC,  KC_ENT,  TO(FN),  _______,          _______, TO(NUM), KC_BSPC, KC_DEL,  KC_HOME, KC_END,  _______,
+    _______, LT_NUM,  KC_F11,  KC_ESC,  KC_ENT,  KC_COLN, _______,          _______, KC_SPC,  KC_BSPC, KC_DEL,  KC_HOME, KC_END,  _______,
     _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           KC_VOLD,          KC_VOLU,
@@ -88,12 +91,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [SYMBOL] = LAYOUT_ergodox_pretty(
     TO(BASE),_______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
-    _______, XXXXXXX, KC_HASH, KC_PLUS, KC_EQL,  TO(FN),  _______,          _______, TO(NUM), KC_LBRC, KC_RBRC, KC_PERC, XXXXXXX, _______,
-    _______, KC_TILD, KC_GRV,  KC_QUOT, KC_DQUO, KC_BSLS,                            KC_PIPE, KC_LPRN, KC_RPRN, KC_ASTR, KC_CIRC, _______,
-    _______, KC_F12,  KC_DLR,  KC_MINS, KC_UNDS, KC_EXLM, _______,          _______, KC_AMPR, KC_LCBR, KC_RCBR, KC_AT,   KC_F12,  _______,
+    _______, XXXXXXX, KC_CIRC, KC_PLUS, KC_EQL,  KC_AT,   _______,          _______, _______, KC_LBRC, KC_RBRC, KC_DLR,  XXXXXXX, _______,
+    _______, KC_TILD, KC_GRV,  KC_QUOT, KC_DQUO, KC_BSLS,                            KC_PIPE, KC_LPRN, KC_RPRN, KC_HASH, KC_EXLM, _______,
+    _______, KC_LT,   KC_GT,   KC_MINS, KC_UNDS, KC_PERC, _______,          _______, KC_AMPR, KC_LCBR, KC_RCBR, KC_ASTR, LT_MED,  _______,
     _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______,
                                                  _______, _______,          _______, _______,
-                                                          _______,          _______,
+                                                          KC_VOLD,          KC_VOLU,
                                         QK_LEAD, _______, _______,          _______, _______, TO(MOUSE)
   ),
 
@@ -119,11 +122,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                        TO(BASE), _______, _______,          _______, _______, TO(BASE)
   ),
 
-  [NUM] = LAYOUT_ergodox_pretty(
+  [NUMPAD] = LAYOUT_ergodox_pretty(
     TO(BASE),_______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, _______,
-    _______, XXXXXXX, KC_UNDS,  KC_ENT,  KC_EQL, XXXXXXX, _______,          _______, KC_COMM, KC_7,    KC_8,    KC_9,    KC_MINS, _______,
+    _______, KC_LNUM, KC_UNDS,  KC_ENT,  KC_EQL, XXXXXXX, _______,          _______, KC_COMM, KC_7,    KC_8,    KC_9,    KC_MINS, _______,
     _______, KC_LALT, KC_LGUI, KC_LCTL, KC_LSFT, KC_SPC,                             KC_BSPC, KC_4,    KC_5,    KC_6,    KC_ENT,  _______,
-    _______, KC_SLSH, KC_ASTR, KC_PLUS, KC_MINS, TO(NUM), _______,          _______, KC_DOT,  KC_1,    KC_2,    KC_3,    KC_EQL,  _______,
+    _______, KC_SLSH, KC_ASTR, KC_PLUS, KC_MINS, TO(NUMPAD), _______,       _______, KC_DOT,  KC_1,    KC_2,    KC_3,    KC_EQL,  _______,
     _______, _______, _______, XXXXXXX, XXXXXXX,                                              KC_0,    XXXXXXX, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
@@ -134,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     TO(BASE),_______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, _______,
     _______, XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, _______,          _______, XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE, XXXXXXX, _______,
     _______, XXXXXXX, KC_MPLY, KC_MPRV, KC_MNXT, XXXXXXX,                            XXXXXXX, KC_MPRV, KC_MNXT, KC_MPLY, XXXXXXX, _______,
-    _______, XXXXXXX, KC_LNUM, KC_BRID, KC_BRIU, TO(MED), _______,          _______, TO(MED), KC_BRID, KC_BRIU, KC_LNUM, XXXXXXX, _______,
+    _______, XXXXXXX, _______, KC_BRID, KC_BRIU, TO(MED), _______,          _______, TO(MED), KC_BRID, KC_BRIU, _______, XXXXXXX, _______,
     _______, _______, _______, XXXXXXX, XXXXXXX,                                              XXXXXXX, XXXXXXX, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
@@ -143,10 +146,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [MOUSE] = LAYOUT_ergodox_pretty(
     TO(BASE),_______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, QK_BOOT,
-    KC_LGUI, STAB,    KC_TAB,  C(KC_Y), C(KC_Z), TD_SCR,  _______,          _______, TD_SCR,  C(KC_Z), C(KC_R), KC_TAB,  STAB,    KC_LGUI,
-    KC_LCTL, KC_DEL,  KC_BTN3, KC_BTN2, KC_BTN1, TD_ENT,                             TD_ENT,  KC_BTN1, KC_BTN2, KC_BTN2, KC_DEL,  KC_LCTL,
-    KC_LSFT, C(KC_A), C(KC_X), C(KC_C), C(KC_V), TD_BTN45,_______,          _______,TD_BTN45, C(KC_V), C(KC_C), C(KC_X), C(KC_A), KC_LSFT,
-    _______, _______, _______, CT_BSPC, SH_SPC,                                               SH_SPC,  CT_BSPC, _______, _______, _______,
+    KC_LGUI, KC_WH_U, TD_BTN45,C(KC_Y), C(KC_Z), TD_SCR,  _______,          _______, TD_SCR,  C(KC_Z), C(KC_Y), TD_BTN45,KC_WH_U, KC_LGUI,
+    KC_LCTL, KC_WH_D, KC_BTN3, KC_BTN2, KC_BTN1, TD_ENT,                             TD_ENT,  KC_BTN1, KC_BTN2, KC_BTN3, KC_WH_D, KC_LCTL,
+    KC_LSFT, C(KC_A), C(KC_X), C(KC_C), C(KC_V), KC_TAB,  _______,          _______, KC_TAB,  C(KC_V), C(KC_C), C(KC_X), C(KC_A), KC_LSFT,
+    _______, _______, _______, CT_DEL,  SH_SPC,                                               SH_SPC,  CT_DEL,  _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
                                        TO(BASE), _______, _______,          _______, _______, TO(BASE)
@@ -184,7 +187,7 @@ bool rgb_matrix_indicators_user(void) {
         case FN:
             rgb_matrix_set_color_all(RGB_CYAN);
             break;
-        case NUM:
+        case NUMPAD:
             rgb_matrix_set_color_all(RGB_PINK);
             break;
         case MED:
@@ -221,7 +224,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             ergodox_right_led_1_on();
             ergodox_right_led_2_on();
             break;
-        case NUM:
+        case NUMPAD:
             ergodox_right_led_2_on();
             ergodox_right_led_3_on();
             break;
@@ -285,9 +288,9 @@ static inline void td_single_or_double(tap_dance_state_t *state, uint16_t single
 void td_scroll_screenshot_fn(tap_dance_state_t *state, void *user_data) {
     switch (dance_step(state)) {
         case SINGLE_TAP:
-            tap_code(KC_NUM);
+            tap_code(KC_LNUM);
             wait_ms(10);
-            tap_code(KC_NUM);
+            tap_code(KC_LNUM);
             break;
         case DOUBLE_TAP:
             tap_code16(S(KC_PSCR));
