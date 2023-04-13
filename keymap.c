@@ -1,13 +1,10 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
 
-#include "leader_macros.c"
-#include "tap_dances.c"
-
 #define STAB S(KC_TAB)
 // home mods row
-#define MT_Z LALT_T(KC_Z)
-#define MT_X LGUI_T(KC_X)
+#define MT_A LALT_T(KC_A)
+#define MT_S LGUI_T(KC_S)
 #define MT_D LCTL_T(KC_D)
 #define MT_F LSFT_T(KC_F)
 #define MT_J LSFT_T(KC_J)
@@ -15,10 +12,10 @@
 #define MT_L LGUI_T(KC_L)
 #define MT_SCLN LALT_T(KC_SCLN)
 // thumb cluster
-#define NAV_ENT LT(NAV, KC_ENT)
-#define MT_SPC LCTL_T(KC_SPC)
-#define MT_TAB LSFT_T(KC_TAB)
-#define FN_BSPC LT(FN, KC_BSPC)
+#define NUM_ENT LT(NUMPAD, KC_ENT)
+#define NUM_SPC LT(NUMPLUS, KC_SPC)
+#define SYM_TAB LT(SYMBOL, KC_TAB)
+#define MED_BSPC LT(MED, KC_BSPC)
 // NUMPLUS layer home row mods
 #define MT_4 LALT_T(KC_4)
 #define MT_3 LGUI_T(KC_3)
@@ -59,12 +56,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_ergodox_pretty(
     XXXXXXX, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_LBRC,          KC_RBRC, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_PSCR,
     KC_LGUI, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_TAB,           KC_ENT,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LALT,
-    KC_ESC,  KC_A,    KC_S,    MT_D,    MT_F,    KC_G,                               KC_H,    MT_J,    MT_K,    MT_L,    MT_SCLN, KC_BSPC,
-    KC_LSFT, MT_Z,    MT_X,    KC_C,    KC_V,    KC_B,    KC_BSPC,          KC_SPC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RCTL,
-    KC_LEFT, KC_RGHT, KC_HOME, NAV_ENT, MT_SPC,                                               MT_TAB,  FN_BSPC, KC_END,  KC_DOWN, KC_UP,
+    KC_ESC,  MT_A,    MT_S,    MT_D,    MT_F,    KC_G,                               KC_H,    MT_J,    MT_K,    MT_L,    MT_SCLN, KC_BSPC,
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_BSPC,          KC_SPC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RCTL,
+    KC_LEFT, KC_RGHT, KC_HOME, NUM_ENT, NUM_SPC,                                              SYM_TAB, MED_BSPC,KC_END,  KC_DOWN, KC_UP,
                                                  KC_MPLY, XXXXXXX,          XXXXXXX, KC_MPLY,
                                                           KC_MPRV,          KC_MNXT,
-                                    OSL(NUMPLUS), KC_DEL, KC_PGUP,          KC_PGDN, KC_ESC, OSL(SYMBOL)
+                                        OSL(NAV), KC_DEL, KC_PGUP,          KC_PGDN, KC_ESC, OSL(FN)
   ),
 
   [NUMPLUS] = LAYOUT_ergodox_pretty(
@@ -72,10 +69,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,          _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
     _______, MT_4,    MT_3,    MT_2,    MT_1,    KC_5,                               KC_6,    MT_0,    MT_9,    MT_8,    MT_7,    _______,
     _______, LT_NUM,  KC_F11,  KC_ESC,  KC_ENT,  KC_COLN, _______,          _______, KC_SPC,  KC_BSPC, KC_DEL,  KC_HOME, KC_END,  _______,
-    _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______,                                              CW_TOGG, _______, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           KC_VOLD,          KC_VOLU,
-                                      TO(MOUSE), _______, _______,          _______, _______, CW_TOGG
+                                        XXXXXXX, _______, _______,          _______, _______, XXXXXXX
   ),
 
   [SYMBOL] = LAYOUT_ergodox_pretty(
@@ -83,10 +80,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, XXXXXXX, KC_CIRC, KC_PLUS, KC_EQL,  KC_AT,   _______,          _______, _______, KC_LBRC, KC_RBRC, KC_DLR,  XXXXXXX, _______,
     _______, KC_TILD, KC_GRV,  KC_QUOT, KC_DQUO, KC_BSLS,                            KC_PIPE, KC_LPRN, KC_RPRN, KC_HASH, KC_EXLM, _______,
     _______, KC_LT,   KC_GT,   KC_MINS, KC_UNDS, KC_PERC, _______,          _______, KC_AMPR, KC_LCBR, KC_RCBR, KC_ASTR, LT_MED,  _______,
-    _______, _______, _______, _______, _______,                                              _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, QK_LEAD,                                              _______, _______, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           KC_VOLD,          KC_VOLU,
-                                        QK_LEAD, _______, _______,          _______, _______, TO(MOUSE)
+                                        XXXXXXX, _______, _______,          _______, _______, XXXXXXX
   ),
 
   [NAV] = LAYOUT_ergodox_pretty(
@@ -97,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, XXXXXXX, XXXXXXX,                                              XXXXXXX, XXXXXXX, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
-                                       TO(BASE), _______, _______,          _______, _______, TO(BASE)
+                                      TO(MOUSE), _______, _______,          _______, _______, TO(MOUSE)
   ),
 
   [FN] = LAYOUT_ergodox_pretty(
@@ -108,12 +105,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, XXXXXXX, XXXXXXX,                                              XXXXXXX, XXXXXXX, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
-                                       TO(BASE), _______, _______,          _______, _______, TO(BASE)
+                                      TO(MOUSE), _______, _______,          _______, _______, TO(MOUSE)
   ),
 
   [NUMPAD] = LAYOUT_ergodox_pretty(
     TO(BASE),_______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, _______,
-    _______, KC_LNUM, KC_UNDS,  KC_ENT,  KC_EQL, XXXXXXX, _______,          _______, KC_COMM, KC_7,    KC_8,    KC_9,    KC_MINS, _______,
+    _______, KC_LNUM, KC_UNDS, KC_ENT,  KC_EQL,  XXXXXXX, _______,          _______, KC_COMM, KC_7,    KC_8,    KC_9,    KC_MINS, _______,
     _______, KC_LALT, KC_LGUI, KC_LCTL, KC_LSFT, KC_SPC,                             KC_BSPC, KC_4,    KC_5,    KC_6,    KC_ENT,  _______,
     _______, KC_SLSH, KC_ASTR, KC_PLUS, KC_MINS, TO(NUMPAD), _______,       _______, KC_DOT,  KC_1,    KC_2,    KC_3,    KC_EQL,  _______,
     _______, _______, _______, XXXXXXX, XXXXXXX,                                              KC_0,    XXXXXXX, _______, _______, _______,
@@ -135,9 +132,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [MOUSE] = LAYOUT_ergodox_pretty(
     TO(BASE),_______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, QK_BOOT,
-    KC_LGUI, KC_WH_U, TD_BTN45,C(KC_Y), C(KC_Z), TD_SCR,  _______,          _______, TD_SCR,  C(KC_Z), C(KC_Y), TD_BTN45,KC_WH_U, KC_LGUI,
-    KC_LCTL, KC_WH_D, KC_BTN3, KC_BTN2, KC_BTN1, TD_ENT,                             TD_ENT,  KC_BTN1, KC_BTN2, KC_BTN3, KC_WH_D, KC_LCTL,
-    KC_LSFT, C(KC_A), C(KC_X), C(KC_C), C(KC_V), KC_TAB,  _______,          _______, KC_TAB,  C(KC_V), C(KC_C), C(KC_X), C(KC_A), KC_LSFT,
+    KC_LGUI, STAB,    C(KC_A), C(KC_Y), C(KC_Z), _______, KC_PSCR,          KC_PSCR, _______, C(KC_Z), C(KC_Y), C(KC_A), STAB,    KC_LGUI,
+    KC_LCTL, KC_TAB,  KC_BTN2, KC_BTN3, KC_BTN1, KC_ENT,                             KC_ENT,  KC_BTN1, KC_BTN3, KC_BTN2, KC_TAB,  KC_LCTL,
+    KC_LSFT, KC_WH_U, KC_WH_D, C(KC_C), C(KC_V), KC_ESC,  S(KC_PSCR),    S(KC_PSCR), KC_ESC,  C(KC_V), C(KC_C), KC_WH_D, KC_WH_U, KC_LSFT,
     _______, _______, _______, CT_DEL,  SH_SPC,                                               SH_SPC,  CT_DEL,  _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
@@ -233,21 +230,97 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 /***** COMBOS *****/
 
-#define COMBO_COUNT 3
-enum combos {
-  JK_ESC_COMBO,
-  COPY_COMBO,
-  PASTE_COMBO,
-  COMBO_LENGTH
+#define COMBO_COUNT 11
+enum combo_events {
+    ESC_COMBO,           //
+    COPY_COMBO,          //
+    PASTE_COMBO,         //
+    TERM_COPY_COMBO,     //
+    TERM_PASTE_COMBO,    //
+    CUT_COMBO,           //
+    BTN4_COMBO,          //
+    BTN5_COMBO,          //
+    HOME_COMBO,          //
+    END_COMBO,           //
+    SCROLL_TOGGLE_COMBO, //
+    COMBO_LENGTH         //
 };
 uint16_t COMBO_LEN = COMBO_LENGTH;
 
-const uint16_t PROGMEM jk_esc_combo[] = {MT_J, MT_K, COMBO_END};
-const uint16_t PROGMEM copy_combo[] = {MT_X, KC_C, COMBO_END};
-const uint16_t PROGMEM paste_combo[] = {MT_X, KC_V, COMBO_END};
+const uint16_t PROGMEM esc_combo[]           = {KC_COMM, KC_DOT, COMBO_END};
+const uint16_t PROGMEM copy_combo[]          = {KC_X, KC_C, COMBO_END};
+const uint16_t PROGMEM paste_combo[]         = {KC_X, KC_V, COMBO_END};
+const uint16_t PROGMEM term_copy_combo[]     = {KC_Z, KC_C, COMBO_END};
+const uint16_t PROGMEM term_paste_combo[]    = {KC_Z, KC_V, COMBO_END};
+const uint16_t PROGMEM cut_combo[]           = {C(KC_C), C(KC_V), COMBO_END};
+const uint16_t PROGMEM btn4_combo[]          = {KC_BTN3, KC_BTN1, COMBO_END};
+const uint16_t PROGMEM btn5_combo[]          = {KC_BTN3, KC_BTN2, COMBO_END};
+const uint16_t PROGMEM home_combo[]          = {C(KC_A), C(KC_Y), COMBO_END};
+const uint16_t PROGMEM end_combo[]           = {C(KC_A), C(KC_Z), COMBO_END};
+const uint16_t PROGMEM scroll_toggle_combo[] = {KC_WH_U, KC_WH_D, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
-  [JK_ESC_COMBO] = COMBO(jk_esc_combo, KC_ESC),
-  [COPY_COMBO] = COMBO(copy_combo, C(S(KC_C))),
-  [PASTE_COMBO] = COMBO(paste_combo, C(S(KC_V))),
+    [ESC_COMBO]           = COMBO(esc_combo, KC_ESC),            //
+    [COPY_COMBO]          = COMBO(copy_combo, C(KC_C)),          //
+    [PASTE_COMBO]         = COMBO(paste_combo, C(KC_V)),         //
+    [TERM_COPY_COMBO]     = COMBO(term_copy_combo, C(S(KC_C))),  //
+    [TERM_PASTE_COMBO]    = COMBO(term_paste_combo, C(S(KC_V))), //
+    [CUT_COMBO]           = COMBO(cut_combo, C(KC_X)),           //
+    [BTN4_COMBO]          = COMBO(btn4_combo, KC_BTN4),          //
+    [BTN5_COMBO]          = COMBO(btn5_combo, KC_BTN5),          //
+    [HOME_COMBO]          = COMBO(home_combo, KC_BTN5),          //
+    [END_COMBO]           = COMBO(end_combo, KC_BTN5),           //
+    [SCROLL_TOGGLE_COMBO] = COMBO_ACTION(scroll_toggle_combo),   //
 };
+
+void process_combo_event(uint16_t combo_index, bool pressed) {
+    switch (combo_index) {
+        case SCROLL_TOGGLE_COMBO:
+            if (pressed) {
+                tap_code(KC_LNUM);
+                wait_ms(10);
+                tap_code(KC_LNUM);
+            }
+            break;
+    }
+}
+
+/***** LEADER MACROS *****/
+
+void leader_end_user(void) {
+    if (leader_sequence_one_key(KC_B)) {
+        SEND_STRING("#!/bin/bash\n\n");
+    } else if (leader_sequence_one_key(KC_H)) {
+        SEND_STRING("python3 -m http.server\n");
+    } else if (leader_sequence_one_key(KC_L)) {
+        SEND_STRING("nc -lnvp ");
+    } else if (leader_sequence_one_key(KC_P)) {
+        SEND_STRING("#!/usr/bin/python3\n\n");
+    } else if (leader_sequence_two_keys(KC_D, KC_T)) {
+        SEND_STRING("../../../../../../etc/passwd");
+    } else if (leader_sequence_two_keys(KC_H, KC_P)) {
+        SEND_STRING("python3 -m http.server ");
+    } else if (leader_sequence_two_keys(KC_L, KC_H)) {
+        SEND_STRING("127.0.0.1");
+    } else if (leader_sequence_two_keys(KC_P, KC_S)) {
+        SEND_STRING("ps aux --forest\n");
+    } else if (leader_sequence_two_keys(KC_S, KC_S)) {
+        SEND_STRING("ss -lntp\n");
+    } else if (leader_sequence_two_keys(KC_X, KC_T)) {
+        SEND_STRING("export TERM=xterm\n");
+    } else if (leader_sequence_two_keys(KC_P, KC_B)) {
+        SEND_STRING("php://filter/convert.base64-encode/resource=");
+    } else if (leader_sequence_two_keys(KC_P, KC_T)) {
+        SEND_STRING("python3 -c \"import pty; pty.spawn('/bin/bash')\"\n");
+    } else if (leader_sequence_two_keys(KC_Z, KC_T)) {
+        SEND_STRING(SS_LCTL("z"));
+        SEND_STRING(SS_DELAY(100));
+        SEND_STRING("stty raw -echo; fg\n\n");
+        SEND_STRING(SS_DELAY(100));
+        SEND_STRING("export TERM=xterm\n");
+    } else if (leader_sequence_three_keys(KC_X, KC_S, KC_S)) {
+        SEND_STRING("<script>alert(window.origin)</script>");
+    } else if (leader_sequence_four_keys(KC_S, KC_U, KC_I, KC_D)) {
+        SEND_STRING("find / -perm -4000 2>/dev/null\n");
+    }
+}

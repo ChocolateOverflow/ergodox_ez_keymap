@@ -23,5 +23,5 @@
 #define LEADER_PER_KEY_TIMING 200
 
 // combos
-#define COMBO_MUST_TAP_PER_COMBO true
+#define COMBO_NO_TIMER
 #define COMBO_MUST_PRESS_IN_ORDER_PER_COMBO false
