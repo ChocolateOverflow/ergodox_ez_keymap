@@ -1,6 +1,9 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
 
+#include "leader_macros.c"
+#include "tap_dances.c"
+
 #define STAB S(KC_TAB)
 // home mods row
 #define MT_Z LALT_T(KC_Z)
@@ -46,20 +49,6 @@ enum layers {
     NUMPAD,
     MED,
     MOUSE,
-};
-
-enum tap_dance_codes {
-    TD_SCROLL_SCREENSHOT = 0,
-    TD_ENTER_ESC,
-    TD_MOUSE_45,
-};
-
-enum {
-    SINGLE_TAP = 0,
-    SINGLE_HOLD,
-    DOUBLE_TAP,
-    DOUBLE_HOLD,
-    MORE_TAPS,
 };
 
 /***** KEYMAP *****/
@@ -242,116 +231,23 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return state;
 };
 
-/***** TAP DANCE *****/
+/***** COMBOS *****/
 
-uint8_t dance_step(tap_dance_state_t *state) {
-    if (state->count == 1) {
-        if (state->pressed)
-            return SINGLE_HOLD;
-        else
-            return SINGLE_TAP;
-    } else if (state->count == 2) {
-        if (state->pressed)
-            return DOUBLE_HOLD;
-        else
-            return DOUBLE_TAP;
-    }
-    return MORE_TAPS;
-}
-
-static inline void td_tap_or_hold(tap_dance_state_t *state, uint16_t tap_action, uint16_t hold_action) {
-    switch (dance_step(state)) {
-        case SINGLE_TAP:
-        case DOUBLE_TAP:
-            tap_code16(tap_action);
-            break;
-        case SINGLE_HOLD:
-        case DOUBLE_HOLD:
-            tap_code16(hold_action);
-            break;
-    }
-}
-
-static inline void td_single_or_double(tap_dance_state_t *state, uint16_t single_tap_action, uint16_t double_tap_action) {
-    switch (dance_step(state)) {
-        case SINGLE_TAP:
-        case SINGLE_HOLD:
-            tap_code16(single_tap_action);
-            break;
-        case DOUBLE_TAP:
-        case DOUBLE_HOLD:
-            tap_code16(double_tap_action);
-            break;
-    }
-}
-
-void td_scroll_screenshot_fn(tap_dance_state_t *state, void *user_data) {
-    switch (dance_step(state)) {
-        case SINGLE_TAP:
-            tap_code(KC_LNUM);
-            wait_ms(10);
-            tap_code(KC_LNUM);
-            break;
-        case DOUBLE_TAP:
-            tap_code16(S(KC_PSCR));
-            break;
-        case SINGLE_HOLD:
-        case DOUBLE_HOLD:
-            tap_code16(KC_PSCR);
-            break;
-    }
-}
-
-void td_enter_esc_fn(tap_dance_state_t *state, void *user_data) {
-    td_single_or_double(state, KC_ENT, KC_ESC);
-}
-
-void td_btn45_fn(tap_dance_state_t *state, void *user_data) {
-    td_single_or_double(state, KC_BTN4, KC_BTN5);
-}
-
-tap_dance_action_t tap_dance_actions[] = {
-    [TD_SCROLL_SCREENSHOT] = ACTION_TAP_DANCE_FN(td_scroll_screenshot_fn), //
-    [TD_ENTER_ESC]         = ACTION_TAP_DANCE_FN(td_enter_esc_fn),         //
-    [TD_MOUSE_45]          = ACTION_TAP_DANCE_FN(td_btn45_fn),             //
+#define COMBO_COUNT 3
+enum combos {
+  JK_ESC_COMBO,
+  COPY_COMBO,
+  PASTE_COMBO,
+  COMBO_LENGTH
 };
+uint16_t COMBO_LEN = COMBO_LENGTH;
 
-/***** LEADER MACROS *****/
+const uint16_t PROGMEM jk_esc_combo[] = {MT_J, MT_K, COMBO_END};
+const uint16_t PROGMEM copy_combo[] = {MT_X, KC_C, COMBO_END};
+const uint16_t PROGMEM paste_combo[] = {MT_X, KC_V, COMBO_END};
 
-void leader_end_user(void) {
-    if (leader_sequence_one_key(KC_B)) {
-        SEND_STRING("#!/bin/bash\n\n");
-    } else if (leader_sequence_one_key(KC_H)) {
-        SEND_STRING("python3 -m http.server\n");
-    } else if (leader_sequence_one_key(KC_L)) {
-        SEND_STRING("nc -lnvp ");
-    } else if (leader_sequence_one_key(KC_P)) {
-        SEND_STRING("#!/usr/bin/python3\n\n");
-    } else if (leader_sequence_two_keys(KC_D, KC_T)) {
-        SEND_STRING("../../../../../../etc/passwd");
-    } else if (leader_sequence_two_keys(KC_H, KC_P)) {
-        SEND_STRING("python3 -m http.server ");
-    } else if (leader_sequence_two_keys(KC_L, KC_H)) {
-        SEND_STRING("127.0.0.1");
-    } else if (leader_sequence_two_keys(KC_P, KC_S)) {
-        SEND_STRING("ps aux --forest\n");
-    } else if (leader_sequence_two_keys(KC_S, KC_S)) {
-        SEND_STRING("ss -lntp\n");
-    } else if (leader_sequence_two_keys(KC_X, KC_T)) {
-        SEND_STRING("export TERM=xterm\n");
-    } else if (leader_sequence_two_keys(KC_P, KC_B)) {
-        SEND_STRING("php://filter/convert.base64-encode/resource=");
-    } else if (leader_sequence_two_keys(KC_P, KC_T)) {
-        SEND_STRING("python3 -c \"import pty; pty.spawn('/bin/bash')\"\n");
-    } else if (leader_sequence_two_keys(KC_Z, KC_T)) {
-        SEND_STRING(SS_LCTL("z"));
-        SEND_STRING(SS_DELAY(100));
-        SEND_STRING("stty raw -echo; fg\n\n");
-        SEND_STRING(SS_DELAY(100));
-        SEND_STRING("export TERM=xterm\n");
-    } else if (leader_sequence_three_keys(KC_X, KC_S, KC_S)) {
-        SEND_STRING("<script>alert(window.origin)</script>");
-    } else if (leader_sequence_four_keys(KC_S, KC_U, KC_I, KC_D)) {
-        SEND_STRING("find / -perm -4000 2>/dev/null\n");
-    }
-}
+combo_t key_combos[COMBO_COUNT] = {
+  [JK_ESC_COMBO] = COMBO(jk_esc_combo, KC_ESC),
+  [COPY_COMBO] = COMBO(copy_combo, C(S(KC_C))),
+  [PASTE_COMBO] = COMBO(paste_combo, C(S(KC_V))),
+};
