@@ -77,9 +77,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [SYMBOL] = LAYOUT_ergodox_pretty(
     TO(BASE),_______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
-    _______, XXXXXXX, KC_CIRC, KC_PLUS, KC_EQL,  KC_AT,   _______,          _______, _______, KC_LBRC, KC_RBRC, KC_DLR,  XXXXXXX, _______,
+    _______, XXXXXXX, KC_CIRC, KC_PLUS, KC_EQL,  KC_AT,   _______,          _______, _______, KC_LBRC, KC_RBRC, KC_ASTR, XXXXXXX, _______,
     _______, KC_TILD, KC_GRV,  KC_QUOT, KC_DQUO, KC_BSLS,                            KC_PIPE, KC_LPRN, KC_RPRN, KC_HASH, KC_EXLM, _______,
-    _______, KC_LT,   KC_GT,   KC_MINS, KC_UNDS, KC_PERC, _______,          _______, KC_AMPR, KC_LCBR, KC_RCBR, KC_ASTR, LT_MED,  _______,
+    _______, KC_LT,   KC_GT,   KC_MINS, KC_UNDS, KC_PERC, _______,          _______, KC_AMPR, KC_LCBR, KC_RCBR, KC_DLR,  LT_MED,  _______,
     _______, _______, _______, _______, QK_LEAD,                                              _______, _______, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           KC_VOLD,          KC_VOLU,
@@ -93,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TO(NAV), _______,          _______, KC_TAB,  KC_HOME, KC_END,  KC_PGDN, KC_PGUP, _______,
     _______, _______, _______, XXXXXXX, XXXXXXX,                                              XXXXXXX, XXXXXXX, _______, _______, _______,
                                                  _______, _______,          _______, _______,
-                                                          _______,          _______,
+                                                          KC_VOLD,          KC_VOLU,
                                       TO(MOUSE), _______, _______,          _______, _______, TO(MOUSE)
   ),
 
@@ -104,13 +104,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_F9,   KC_F10,  KC_F11,  KC_F12,  XXXXXXX, _______,          _______, TO(FN),  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
     _______, _______, _______, XXXXXXX, XXXXXXX,                                              XXXXXXX, XXXXXXX, _______, _______, _______,
                                                  _______, _______,          _______, _______,
-                                                          _______,          _______,
+                                                          KC_VOLD,          KC_VOLU,
                                       TO(MOUSE), _______, _______,          _______, _______, TO(MOUSE)
   ),
 
   [NUMPAD] = LAYOUT_ergodox_pretty(
     TO(BASE),_______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, _______,
-    _______, KC_LNUM, KC_UNDS, KC_ENT,  KC_EQL,  XXXXXXX, _______,          _______, KC_COMM, KC_7,    KC_8,    KC_9,    KC_MINS, _______,
+    _______, XXXXXXX, KC_UNDS, KC_ENT,  KC_EQL,  KC_LNUM, _______,          _______, KC_COMM, KC_7,    KC_8,    KC_9,    KC_MINS, _______,
     _______, KC_LALT, KC_LGUI, KC_LCTL, KC_LSFT, KC_SPC,                             KC_BSPC, KC_4,    KC_5,    KC_6,    KC_ENT,  _______,
     _______, KC_SLSH, KC_ASTR, KC_PLUS, KC_MINS, TO(NUMPAD), _______,       _______, KC_DOT,  KC_1,    KC_2,    KC_3,    KC_EQL,  _______,
     _______, _______, _______, XXXXXXX, XXXXXXX,                                              KC_0,    XXXXXXX, _______, _______, _______,
@@ -121,9 +121,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [MED] = LAYOUT_ergodox_pretty(
     TO(BASE),_______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, _______,
-    _______, XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, _______,          _______, XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE, XXXXXXX, _______,
+    _______, XXXXXXX, _______, KC_BRID, KC_BRIU, XXXXXXX, _______,          _______, XXXXXXX, KC_BRID, KC_BRIU, _______, XXXXXXX, _______,
     _______, XXXXXXX, KC_MPLY, KC_MPRV, KC_MNXT, XXXXXXX,                            XXXXXXX, KC_MPRV, KC_MNXT, KC_MPLY, XXXXXXX, _______,
-    _______, XXXXXXX, _______, KC_BRID, KC_BRIU, TO(MED), _______,          _______, TO(MED), KC_BRID, KC_BRIU, _______, XXXXXXX, _______,
+    _______, XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, TO(MED), _______,          _______, TO(MED), KC_VOLD, KC_VOLU, KC_MUTE, XXXXXXX, _______,
     _______, _______, _______, XXXXXXX, XXXXXXX,                                              XXXXXXX, XXXXXXX, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
@@ -132,9 +132,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [MOUSE] = LAYOUT_ergodox_pretty(
     TO(BASE),_______, _______, _______, _______, _______, XXXXXXX,          XXXXXXX, _______, _______, _______, _______, _______, QK_BOOT,
-    KC_LGUI, STAB,    C(KC_A), C(KC_Y), C(KC_Z), _______, KC_PSCR,          KC_PSCR, _______, C(KC_Z), C(KC_Y), C(KC_A), STAB,    KC_LGUI,
-    KC_LCTL, KC_TAB,  KC_BTN2, KC_BTN3, KC_BTN1, KC_ENT,                             KC_ENT,  KC_BTN1, KC_BTN3, KC_BTN2, KC_TAB,  KC_LCTL,
-    KC_LSFT, KC_WH_U, KC_WH_D, C(KC_C), C(KC_V), KC_ESC,  S(KC_PSCR),    S(KC_PSCR), KC_ESC,  C(KC_V), C(KC_C), KC_WH_D, KC_WH_U, KC_LSFT,
+    KC_LGUI, _______, C(KC_A), C(KC_Y), C(KC_Z), STAB,    KC_PSCR,          KC_PSCR, STAB,    C(KC_Z), C(KC_Y), C(KC_A), _______, KC_LGUI,
+    KC_LCTL, KC_ESC,  KC_BTN2, KC_BTN3, KC_BTN1, KC_TAB,                             KC_TAB,  KC_BTN1, KC_BTN3, KC_BTN2, KC_ESC,  KC_LCTL,
+    KC_LSFT, KC_WH_U, KC_WH_D, C(KC_C), C(KC_V), KC_ENT,  S(KC_PSCR),    S(KC_PSCR), KC_ENT,  C(KC_V), C(KC_C), KC_WH_D, KC_WH_U, KC_LSFT,
     _______, _______, _______, CT_DEL,  SH_SPC,                                               SH_SPC,  CT_DEL,  _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
@@ -240,9 +240,9 @@ enum combo_events {
     CUT_COMBO,           //
     BTN4_COMBO,          //
     BTN5_COMBO,          //
+    SCROLL_TOGGLE_COMBO, //
     HOME_COMBO,          //
     END_COMBO,           //
-    SCROLL_TOGGLE_COMBO, //
     COMBO_LENGTH         //
 };
 uint16_t COMBO_LEN = COMBO_LENGTH;
@@ -253,11 +253,11 @@ const uint16_t PROGMEM paste_combo[]         = {KC_X, KC_V, COMBO_END};
 const uint16_t PROGMEM term_copy_combo[]     = {KC_Z, KC_C, COMBO_END};
 const uint16_t PROGMEM term_paste_combo[]    = {KC_Z, KC_V, COMBO_END};
 const uint16_t PROGMEM cut_combo[]           = {C(KC_C), C(KC_V), COMBO_END};
-const uint16_t PROGMEM btn4_combo[]          = {KC_BTN3, KC_BTN1, COMBO_END};
-const uint16_t PROGMEM btn5_combo[]          = {KC_BTN3, KC_BTN2, COMBO_END};
+const uint16_t PROGMEM btn4_combo[]          = {KC_ESC, KC_BTN1, COMBO_END};
+const uint16_t PROGMEM btn5_combo[]          = {KC_ESC, KC_BTN2, COMBO_END};
+const uint16_t PROGMEM scroll_toggle_combo[] = {KC_ESC, KC_BTN3, COMBO_END};
 const uint16_t PROGMEM home_combo[]          = {C(KC_A), C(KC_Y), COMBO_END};
 const uint16_t PROGMEM end_combo[]           = {C(KC_A), C(KC_Z), COMBO_END};
-const uint16_t PROGMEM scroll_toggle_combo[] = {KC_WH_U, KC_WH_D, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     [ESC_COMBO]           = COMBO(esc_combo, KC_ESC),            //
@@ -268,9 +268,9 @@ combo_t key_combos[COMBO_COUNT] = {
     [CUT_COMBO]           = COMBO(cut_combo, C(KC_X)),           //
     [BTN4_COMBO]          = COMBO(btn4_combo, KC_BTN4),          //
     [BTN5_COMBO]          = COMBO(btn5_combo, KC_BTN5),          //
+    [SCROLL_TOGGLE_COMBO] = COMBO_ACTION(scroll_toggle_combo),   //
     [HOME_COMBO]          = COMBO(home_combo, KC_BTN5),          //
     [END_COMBO]           = COMBO(end_combo, KC_BTN5),           //
-    [SCROLL_TOGGLE_COMBO] = COMBO_ACTION(scroll_toggle_combo),   //
 };
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
