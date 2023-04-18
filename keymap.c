@@ -11,6 +11,9 @@
 #define MT_K LCTL_T(KC_K)
 #define MT_L LGUI_T(KC_L)
 #define MT_SCLN LALT_T(KC_SCLN)
+// layer taps
+#define LT_Z LT(NUMPAD, KC_ENT)
+#define LT_SLSH LT(MED, KC_BSPC)
 // thumb cluster
 #define NUM_ENT LT(NUMPAD, KC_ENT)
 #define NUM_SPC LT(NUMPLUS, KC_SPC)
@@ -57,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_LBRC,          KC_RBRC, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_PSCR,
     KC_LGUI, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_TAB,           KC_ENT,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LALT,
     KC_ESC,  MT_A,    MT_S,    MT_D,    MT_F,    KC_G,                               KC_H,    MT_J,    MT_K,    MT_L,    MT_SCLN, KC_BSPC,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_BSPC,          KC_SPC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RCTL,
+    KC_LSFT, LT_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_BSPC,          KC_SPC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  LT_SLSH, KC_RCTL,
     KC_LEFT, KC_RGHT, KC_HOME, NUM_ENT, NUM_SPC,                                              SYM_TAB, MED_BSPC,KC_END,  KC_DOWN, KC_UP,
                                                  KC_MPLY, XXXXXXX,          XXXXXXX, KC_MPLY,
                                                           KC_MPRV,          KC_MNXT,
@@ -250,8 +253,8 @@ uint16_t COMBO_LEN = COMBO_LENGTH;
 const uint16_t PROGMEM esc_combo[]           = {KC_COMM, KC_DOT, COMBO_END};
 const uint16_t PROGMEM copy_combo[]          = {KC_X, KC_C, COMBO_END};
 const uint16_t PROGMEM paste_combo[]         = {KC_X, KC_V, COMBO_END};
-const uint16_t PROGMEM term_copy_combo[]     = {KC_Z, KC_C, COMBO_END};
-const uint16_t PROGMEM term_paste_combo[]    = {KC_Z, KC_V, COMBO_END};
+const uint16_t PROGMEM term_copy_combo[]     = {KC_C, KC_X, COMBO_END};
+const uint16_t PROGMEM term_paste_combo[]    = {KC_V, KC_X, COMBO_END};
 const uint16_t PROGMEM cut_combo[]           = {C(KC_C), C(KC_V), COMBO_END};
 const uint16_t PROGMEM btn4_combo[]          = {KC_ESC, KC_BTN1, COMBO_END};
 const uint16_t PROGMEM btn5_combo[]          = {KC_ESC, KC_BTN2, COMBO_END};

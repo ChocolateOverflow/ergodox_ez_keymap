@@ -24,4 +24,4 @@
 
 // combos
 #define COMBO_NO_TIMER
-#define COMBO_MUST_PRESS_IN_ORDER_PER_COMBO false
+#define COMBO_MUST_PRESS_IN_ORDER
