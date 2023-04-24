@@ -12,8 +12,8 @@
 #define MT_L LGUI_T(KC_L)
 #define MT_SCLN LALT_T(KC_SCLN)
 // layer taps
-#define LT_Z LT(NUMPAD, KC_ENT)
-#define LT_SLSH LT(MED, KC_BSPC)
+#define LT_Z LT(NUMPAD, KC_Z)
+#define LT_SLSH LT(MED, KC_SLSH)
 // thumb cluster
 #define NUM_ENT LT(NUMPAD, KC_ENT)
 #define NUM_SPC LT(NUMPLUS, KC_SPC)
