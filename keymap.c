@@ -269,8 +269,8 @@ const uint16_t PROGMEM term_paste_combo[]    = {KC_V, KC_X, COMBO_END};
 // mouse top row
 const uint16_t PROGMEM home_combo[]          = {C(KC_A), C(KC_Y), COMBO_END};
 const uint16_t PROGMEM end_combo[]           = {C(KC_A), C(KC_Z), COMBO_END};
-const uint16_t PROGMEM tab_next_combo[]      = {KC_ESC, C(KC_Z), COMBO_END};
-const uint16_t PROGMEM tab_prev_combo[]      = {KC_ESC, C(KC_Y), COMBO_END};
+const uint16_t PROGMEM tab_next_combo[]      = {KC_ESC, C(KC_Y), COMBO_END};
+const uint16_t PROGMEM tab_prev_combo[]      = {KC_ESC, C(KC_Z), COMBO_END};
 // mouse home row
 const uint16_t PROGMEM btn4_combo[]          = {KC_ESC, KC_BTN1, COMBO_END};
 const uint16_t PROGMEM btn5_combo[]          = {KC_ESC, KC_BTN2, COMBO_END};
@@ -288,8 +288,8 @@ combo_t key_combos[COMBO_COUNT] = {
     [TERM_COPY_COMBO]     = COMBO(term_copy_combo, C(S(KC_C))),
     [TERM_PASTE_COMBO]    = COMBO(term_paste_combo, C(S(KC_V))),
     // mouse top row
-    [HOME_COMBO]          = COMBO(home_combo, KC_BTN5),
-    [END_COMBO]           = COMBO(end_combo, KC_BTN5),
+    [HOME_COMBO]          = COMBO(home_combo, KC_HOME),
+    [END_COMBO]           = COMBO(end_combo, KC_END),
     [TAB_NEXT_COMBO]      = COMBO(tab_next_combo, C(KC_TAB)),
     [TAB_PREV_COMBO]      = COMBO(tab_prev_combo, C(STAB)),
     // mouse home row
@@ -298,8 +298,8 @@ combo_t key_combos[COMBO_COUNT] = {
     [SCROLL_TOGGLE_COMBO] = COMBO_ACTION(scroll_toggle_combo),
     // mouse bottom row
     [CUT_COMBO]           = COMBO(cut_combo, C(KC_X)),
-    [TAB_NEW_COMBO]       = COMBO(tab_new_combo, C(KC_X)),
-    [TAB_CLOSE_COMBO]     = COMBO(tab_close_combo, C(KC_X)),
+    [TAB_NEW_COMBO]       = COMBO(tab_new_combo, C(KC_T)),
+    [TAB_CLOSE_COMBO]     = COMBO(tab_close_combo, C(KC_W)),
 };
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
