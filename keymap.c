@@ -35,7 +35,7 @@
 #define CT_ENT   LCTL_T(KC_ENT)
 #define SH_SPC   LSFT_T(KC_SPC)
 #define SH_TAB   LSFT_T(KC_TAB)
-#define CT_DEL   LCTL_T(KC_DEL)
+#define CT_BSPC   LCTL_T(KC_BSPC)
 #define TD_SCR   TD(TD_SCROLL_SCREENSHOT)
 #define TD_ENT   TD(TD_ENTER_ESC)
 #define TD_BTN45 TD(TD_MOUSE_45)
@@ -138,7 +138,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LGUI, _______, C(KC_A), C(KC_Y), C(KC_Z), STAB,    KC_PSCR,          KC_PSCR, STAB,    C(KC_Z), C(KC_Y), C(KC_A), _______, KC_LGUI,
     KC_LCTL, KC_ESC,  KC_BTN2, KC_BTN3, KC_BTN1, KC_TAB,                             KC_TAB,  KC_BTN1, KC_BTN3, KC_BTN2, KC_ESC,  KC_LCTL,
     KC_LSFT, KC_WH_U, KC_WH_D, C(KC_C), C(KC_V), KC_ENT,  S(KC_PSCR),    S(KC_PSCR), KC_ENT,  C(KC_V), C(KC_C), KC_WH_D, KC_WH_U, KC_LSFT,
-    _______, _______, _______, CT_DEL,  SH_SPC,                                               SH_SPC,  CT_DEL,  _______, _______, _______,
+    _______, _______, _______, CT_BSPC, SH_SPC,                                               SH_SPC,  CT_BSPC, _______, _______, _______,
                                                  _______, _______,          _______, _______,
                                                           _______,          _______,
                                        TO(BASE), _______, _______,          _______, _______, TO(BASE)
