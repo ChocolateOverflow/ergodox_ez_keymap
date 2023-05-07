@@ -16,10 +16,10 @@
 #define LT_SLSH  LT(MED, KC_SLSH)
 // thumb cluster
 #define NUM_ENT  LT(NUMPAD, KC_ENT)
-#define NUM_SPC  LT(NUMPLUS, KC_SPC)
+#define UTIL_SPC LT(UTIL, KC_SPC)
 #define SYM_TAB  LT(SYMBOL, KC_TAB)
 #define MED_BSPC LT(MED, KC_BSPC)
-// NUMPLUS layer home row mods
+// UTIL layer home row mods
 #define MT_4     LALT_T(KC_4)
 #define MT_3     LGUI_T(KC_3)
 #define MT_2     LCTL_T(KC_2)
@@ -35,14 +35,14 @@
 #define CT_ENT   LCTL_T(KC_ENT)
 #define SH_SPC   LSFT_T(KC_SPC)
 #define SH_TAB   LSFT_T(KC_TAB)
-#define CT_BSPC   LCTL_T(KC_BSPC)
+#define CT_BSPC  LCTL_T(KC_BSPC)
 #define TD_SCR   TD(TD_SCROLL_SCREENSHOT)
 #define TD_ENT   TD(TD_ENTER_ESC)
 #define TD_BTN45 TD(TD_MOUSE_45)
 
 enum layers {
   BASE = 0,
-  NUMPLUS,
+  UTIL,
   SYMBOL,
   NAV,
   FN,
@@ -61,13 +61,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LGUI, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_TAB,           KC_ENT,  KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LALT,
     KC_ESC,  MT_A,    MT_S,    MT_D,    MT_F,    KC_G,                               KC_H,    MT_J,    MT_K,    MT_L,    MT_SCLN, KC_BSPC,
     KC_LSFT, LT_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_BSPC,          KC_SPC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  LT_SLSH, KC_RCTL,
-    KC_LEFT, KC_RGHT, KC_HOME, NUM_ENT, NUM_SPC,                                              SYM_TAB, MED_BSPC,KC_END,  KC_DOWN, KC_UP,
+    KC_LEFT, KC_RGHT, KC_HOME, NUM_ENT, UTIL_SPC,                                             SYM_TAB, MED_BSPC,KC_END,  KC_DOWN, KC_UP,
                                                  KC_MPLY, XXXXXXX,          XXXXXXX, KC_MPLY,
                                                           KC_MPRV,          KC_MNXT,
                                         OSL(NAV), KC_DEL, KC_PGUP,          KC_PGDN, KC_ESC, OSL(FN)
   ),
 
-  [NUMPLUS] = LAYOUT_ergodox_pretty(
+  [UTIL] = LAYOUT_ergodox_pretty(
     TO(BASE),_______, _______, _______, _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______,
     _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,          _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______,
     _______, MT_4,    MT_3,    MT_2,    MT_1,    KC_5,                               KC_6,    MT_0,    MT_9,    MT_8,    MT_7,    _______,
@@ -164,7 +164,7 @@ bool rgb_matrix_indicators_user(void) {
   case BASE:
     rgb_matrix_set_color_all(RGB_RED);
     break;
-  case NUMPLUS:
+  case UTIL:
     rgb_matrix_set_color_all(RGB_BLUE);
     break;
   case SYMBOL:
@@ -201,7 +201,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   ergodox_right_led_3_off();
   switch (layer) {
   // case BASE: no LED
-  case NUMPLUS:
+  case UTIL:
     ergodox_right_led_1_on();
     break;
   case SYMBOL:
@@ -246,7 +246,7 @@ enum combo_events {
   HOME_COMBO,
   END_COMBO,
   TAB_NEXT_COMBO,
-  TAB_PREV_COMBO,
+  CTRL_F_COMBO,
   // mouse home row
   BTN4_COMBO,
   BTN5_COMBO,
@@ -270,7 +270,7 @@ const uint16_t PROGMEM term_paste_combo[]    = {KC_V, KC_X, COMBO_END};
 const uint16_t PROGMEM home_combo[]          = {C(KC_A), C(KC_Y), COMBO_END};
 const uint16_t PROGMEM end_combo[]           = {C(KC_A), C(KC_Z), COMBO_END};
 const uint16_t PROGMEM tab_next_combo[]      = {KC_ESC, C(KC_Y), COMBO_END};
-const uint16_t PROGMEM tab_prev_combo[]      = {KC_ESC, C(KC_Z), COMBO_END};
+const uint16_t PROGMEM ctrl_f_combo[]        = {KC_ESC, C(KC_Z), COMBO_END};
 // mouse home row
 const uint16_t PROGMEM btn4_combo[]          = {KC_ESC, KC_BTN1, COMBO_END};
 const uint16_t PROGMEM btn5_combo[]          = {KC_ESC, KC_BTN2, COMBO_END};
@@ -291,7 +291,7 @@ combo_t key_combos[COMBO_COUNT] = {
     [HOME_COMBO]          = COMBO(home_combo, KC_HOME),
     [END_COMBO]           = COMBO(end_combo, KC_END),
     [TAB_NEXT_COMBO]      = COMBO(tab_next_combo, C(KC_TAB)),
-    [TAB_PREV_COMBO]      = COMBO(tab_prev_combo, C(STAB)),
+    [CTRL_F_COMBO]        = COMBO(ctrl_f_combo, C(KC_F)),
     // mouse home row
     [BTN4_COMBO]          = COMBO(btn4_combo, KC_BTN4),
     [BTN5_COMBO]          = COMBO(btn5_combo, KC_BTN5),
