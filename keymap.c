@@ -234,7 +234,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
   /***** COMBOS *****/
 
-#define COMBO_COUNT 15
+#define COMBO_COUNT 16
 enum combo_events {
   // home row
   ESC_COMBO,
@@ -246,6 +246,7 @@ enum combo_events {
   HOME_COMBO,
   END_COMBO,
   TAB_NEXT_COMBO,
+  TAB_PREV_COMBO,
   CTRL_F_COMBO,
   // mouse home row
   BTN4_COMBO,
@@ -269,8 +270,9 @@ const uint16_t PROGMEM term_paste_combo[]    = {KC_V, KC_X, COMBO_END};
 // mouse top row
 const uint16_t PROGMEM home_combo[]          = {C(KC_A), C(KC_Y), COMBO_END};
 const uint16_t PROGMEM end_combo[]           = {C(KC_A), C(KC_Z), COMBO_END};
-const uint16_t PROGMEM tab_next_combo[]      = {KC_ESC, C(KC_Y), COMBO_END};
-const uint16_t PROGMEM ctrl_f_combo[]        = {KC_ESC, C(KC_Z), COMBO_END};
+const uint16_t PROGMEM tab_next_combo[]      = {KC_ESC, C(KC_Z), COMBO_END};
+const uint16_t PROGMEM tab_prev_combo[]      = {KC_ESC, C(KC_Y), COMBO_END};
+const uint16_t PROGMEM ctrl_f_combo[]        = {KC_ESC, C(KC_A), COMBO_END};
 // mouse home row
 const uint16_t PROGMEM btn4_combo[]          = {KC_ESC, KC_BTN1, COMBO_END};
 const uint16_t PROGMEM btn5_combo[]          = {KC_ESC, KC_BTN2, COMBO_END};
@@ -291,6 +293,7 @@ combo_t key_combos[COMBO_COUNT] = {
     [HOME_COMBO]          = COMBO(home_combo, KC_HOME),
     [END_COMBO]           = COMBO(end_combo, KC_END),
     [TAB_NEXT_COMBO]      = COMBO(tab_next_combo, C(KC_TAB)),
+    [TAB_PREV_COMBO]      = COMBO(tab_prev_combo, C(STAB)),
     [CTRL_F_COMBO]        = COMBO(ctrl_f_combo, C(KC_F)),
     // mouse home row
     [BTN4_COMBO]          = COMBO(btn4_combo, KC_BTN4),
