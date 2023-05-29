@@ -147,92 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
-/***** RGB *****/
-
-extern rgb_config_t rgb_matrix_config;
-
-void keyboard_post_init_user(void) {
-  rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-  rgb_matrix_sethsv_noeeprom(HSV_OFF);
-}
-
-bool rgb_matrix_indicators_user(void) {
-  if (keyboard_config.disable_layer_led) {
-    return false;
-  }
-  switch (biton32(layer_state)) {
-  case BASE:
-    rgb_matrix_set_color_all(RGB_RED);
-    break;
-  case UTIL:
-    rgb_matrix_set_color_all(RGB_BLUE);
-    break;
-  case SYMBOL:
-    rgb_matrix_set_color_all(RGB_GREEN);
-    break;
-  case NAV:
-    rgb_matrix_set_color_all(RGB_ORANGE);
-    break;
-  case FN:
-    rgb_matrix_set_color_all(RGB_CYAN);
-    break;
-  case NUMPAD:
-    rgb_matrix_set_color_all(RGB_PINK);
-    break;
-  case MED:
-    rgb_matrix_set_color_all(RGB_PURPLE);
-    break;
-  case MOUSE:
-    rgb_matrix_set_color_all(RGB_MAGENTA);
-    break;
-  default:
-    if (rgb_matrix_get_flags() == LED_FLAG_NONE)
-      rgb_matrix_set_color_all(RGB_OFF);
-    break;
-  }
-  return true;
-}
-
-layer_state_t layer_state_set_user(layer_state_t state) {
-  layer_state_t layer = biton(state);
-  ergodox_board_led_off();
-  ergodox_right_led_1_off();
-  ergodox_right_led_2_off();
-  ergodox_right_led_3_off();
-  switch (layer) {
-  // case BASE: no LED
-  case UTIL:
-    ergodox_right_led_1_on();
-    break;
-  case SYMBOL:
-    ergodox_right_led_2_on();
-    break;
-  case NAV:
-    ergodox_right_led_3_on();
-    break;
-  case FN:
-    ergodox_right_led_1_on();
-    ergodox_right_led_2_on();
-    break;
-  case NUMPAD:
-    ergodox_right_led_2_on();
-    ergodox_right_led_3_on();
-    break;
-  case MED:
-    ergodox_right_led_1_on();
-    ergodox_right_led_3_on();
-  case MOUSE:
-    ergodox_right_led_1_on();
-    ergodox_right_led_2_on();
-    ergodox_right_led_3_on();
-    break;
-  default:
-    break;
-  }
-  return state;
-};
-
-  /***** COMBOS *****/
+/***** COMBOS *****/
 
 #define COMBO_COUNT 16
 enum combo_events {
@@ -356,3 +271,88 @@ void leader_end_user(void) {
     SEND_STRING("find / -perm -4000 2>/dev/null\n");
   }
 }
+
+/***** RGB *****/
+
+extern rgb_config_t rgb_matrix_config;
+
+void keyboard_post_init_user(void) {
+  rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+  rgb_matrix_sethsv_noeeprom(HSV_OFF);
+}
+
+bool rgb_matrix_indicators_user(void) {
+  if (keyboard_config.disable_layer_led) {
+    return false;
+  }
+  switch (biton32(layer_state)) {
+  case BASE:
+    rgb_matrix_set_color_all(RGB_RED);
+    break;
+  case UTIL:
+    rgb_matrix_set_color_all(RGB_BLUE);
+    break;
+  case SYMBOL:
+    rgb_matrix_set_color_all(RGB_GREEN);
+    break;
+  case NAV:
+    rgb_matrix_set_color_all(RGB_ORANGE);
+    break;
+  case FN:
+    rgb_matrix_set_color_all(RGB_CYAN);
+    break;
+  case NUMPAD:
+    rgb_matrix_set_color_all(RGB_PINK);
+    break;
+  case MED:
+    rgb_matrix_set_color_all(RGB_PURPLE);
+    break;
+  case MOUSE:
+    rgb_matrix_set_color_all(RGB_MAGENTA);
+    break;
+  default:
+    if (rgb_matrix_get_flags() == LED_FLAG_NONE)
+      rgb_matrix_set_color_all(RGB_OFF);
+    break;
+  }
+  return true;
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+  layer_state_t layer = biton(state);
+  ergodox_board_led_off();
+  ergodox_right_led_1_off();
+  ergodox_right_led_2_off();
+  ergodox_right_led_3_off();
+  switch (layer) {
+  // case BASE: no LED
+  case UTIL:
+    ergodox_right_led_1_on();
+    break;
+  case SYMBOL:
+    ergodox_right_led_2_on();
+    break;
+  case NAV:
+    ergodox_right_led_3_on();
+    break;
+  case FN:
+    ergodox_right_led_1_on();
+    ergodox_right_led_2_on();
+    break;
+  case NUMPAD:
+    ergodox_right_led_2_on();
+    ergodox_right_led_3_on();
+    break;
+  case MED:
+    ergodox_right_led_1_on();
+    ergodox_right_led_3_on();
+  case MOUSE:
+    ergodox_right_led_1_on();
+    ergodox_right_led_2_on();
+    ergodox_right_led_3_on();
+    break;
+  default:
+    break;
+  }
+  return state;
+};
