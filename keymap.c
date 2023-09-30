@@ -7,8 +7,8 @@
 #define MT_S     LGUI_T(KC_S)
 #define MT_D     LCTL_T(KC_D)
 #define MT_F     LSFT_T(KC_F)
-#define MT_J     LSFT_T(KC_J)
-#define MT_K     LCTL_T(KC_K)
+#define MT_J     RSFT_T(KC_J)
+#define MT_K     RCTL_T(KC_K)
 #define MT_L     LGUI_T(KC_L)
 #define MT_SCLN  LALT_T(KC_SCLN)
 // layer taps
@@ -24,8 +24,8 @@
 #define MT_3     LGUI_T(KC_3)
 #define MT_2     LCTL_T(KC_2)
 #define MT_1     LSFT_T(KC_1)
-#define MT_0     LSFT_T(KC_0)
-#define MT_9     LCTL_T(KC_9)
+#define MT_0     RSFT_T(KC_0)
+#define MT_9     RCTL_T(KC_9)
 #define MT_8     LALT_T(KC_8)
 #define MT_7     LGUI_T(KC_7)
 // Layer access
